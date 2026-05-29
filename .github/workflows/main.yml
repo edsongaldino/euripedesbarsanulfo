@@ -19,4 +19,4 @@ jobs:
           host: ${{ secrets.DO_HOST }}
           user: ${{ secrets.DO_USER }}
           password: ${{ secrets.DO_PASS }}
-          remoteDir: "/public_html/efas"
+          remoteDir: "public_html"
