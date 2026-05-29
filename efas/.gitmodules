@@ -1,0 +1,11 @@
+[submodule "vendor/farhanwazir/laravelgooglemaps"]
+	path = vendor/farhanwazir/laravelgooglemaps
+	url = https://github.com/farhanwazir/laravelgooglemaps.git
+
+[submodule "vendor/laracasts/generators"]
+	path = vendor/laracasts/generators
+	url = https://github.com/laracasts/Laravel-5-Generators-Extended.git
+
+[submodule "vendor/safe2pay/sdk"]
+	path = vendor/safe2pay/sdk
+	url = https://github.com/SafeToPay/PHP.git

@@ -1,0 +1,51 @@
+[20-Sep-2019 21:28:35 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:28:35 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:28:35 UTC] PHP Warning:  include(): Failed opening 'site-mod-topo.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:28:38 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:28:38 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:28:38 UTC] PHP Warning:  include(): Failed opening 'site-mod-topo.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:28:39 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:28:39 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:28:39 UTC] PHP Warning:  include(): Failed opening 'site-mod-topo.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:28:53 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:28:53 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:28:53 UTC] PHP Warning:  include(): Failed opening 'site-mod-topo.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:28:55 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:28:55 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:28:55 UTC] PHP Warning:  include(): Failed opening 'site-mod-topo.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:12 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:12 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:12 UTC] PHP Warning:  include(): Failed opening 'site-mod-topo.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:19 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:19 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:19 UTC] PHP Warning:  include(): Failed opening 'site-mod-topo.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:19 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:19 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:19 UTC] PHP Warning:  include(): Failed opening 'site-mod-topo.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:20 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:20 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:20 UTC] PHP Warning:  include(): Failed opening 'site-mod-topo.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:20 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:20 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:20 UTC] PHP Warning:  include(): Failed opening 'site-mod-topo.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:20 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:20 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:20 UTC] PHP Warning:  include(): Failed opening 'site-mod-topo.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:20 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:20 UTC] PHP Warning:  include(site-mod-topo.php): failed to open stream: No such file or directory in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 21:29:20 UTC] PHP Warning:  include(): Failed opening 'site-mod-topo.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/efasmtcom/public_html/vivervaleapena/index.php on line 9
+[20-Sep-2019 18:21:20 America/Cuiaba] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'centro_espirita.status' in 'where clause'' in /home/efasmtcom/public_html/vivervaleapena/index.php:11
+Stack trace:
+#0 /home/efasmtcom/public_html/vivervaleapena/index.php(11): PDO->query('SELECT * FROM c...')
+#1 {main}
+  thrown in /home/efasmtcom/public_html/vivervaleapena/index.php on line 11
+[20-Sep-2019 18:21:21 America/Cuiaba] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'centro_espirita.status' in 'where clause'' in /home/efasmtcom/public_html/vivervaleapena/index.php:11
+Stack trace:
+#0 /home/efasmtcom/public_html/vivervaleapena/index.php(11): PDO->query('SELECT * FROM c...')
+#1 {main}
+  thrown in /home/efasmtcom/public_html/vivervaleapena/index.php on line 11
+[20-Sep-2019 18:37:31 America/Cuiaba] PHP Deprecated:  Function ereg_replace() is deprecated in /home/efasmtcom/public_html/vivervaleapena/ferramenta/funcao_php/remove_caracter_especial.php on line 4
+[20-Sep-2019 18:37:31 America/Cuiaba] PHP Deprecated:  Function ereg_replace() is deprecated in /home/efasmtcom/public_html/vivervaleapena/ferramenta/funcao_php/remove_caracter_especial.php on line 4
+[20-Sep-2019 18:37:31 America/Cuiaba] PHP Deprecated:  Function ereg_replace() is deprecated in /home/efasmtcom/public_html/vivervaleapena/ferramenta/funcao_php/remove_caracter_especial.php on line 4
+[20-Sep-2019 18:37:31 America/Cuiaba] PHP Deprecated:  Function ereg_replace() is deprecated in /home/efasmtcom/public_html/vivervaleapena/ferramenta/funcao_php/remove_caracter_especial.php on line 4
+[20-Sep-2019 18:37:31 America/Cuiaba] PHP Deprecated:  Function ereg_replace() is deprecated in /home/efasmtcom/public_html/vivervaleapena/ferramenta/funcao_php/remove_caracter_especial.php on line 4

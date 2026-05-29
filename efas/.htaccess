@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# força o uso do www em tudo
+Options +FollowSymLinks
+RewriteCond %{HTTP_HOST} ^(www\.)?efasmt\.com\.br [NC]
+RewriteRule ^(.*)$ https://efas.euripedesbarsanulfo.org.br/$1 [L,R=301]
+
+RewriteRule ^inscricao-efas inscricao.php [NC]

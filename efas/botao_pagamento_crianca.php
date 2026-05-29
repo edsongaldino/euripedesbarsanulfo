@@ -1,0 +1,1 @@
+<div class="col-md-12 pagar-inscricao margin-15"><a href="https://mpago.la/1pyPDfs" target="_blank" title="Pagar com Mercado Pago"><img src="/images/mercadopago.png" width="300" alt="Pague com Mercado Pago!!" /></a></div>

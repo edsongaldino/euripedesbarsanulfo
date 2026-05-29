@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!--
+Web Service CEP, desenvolvido por Evanil Rosano de Paula.
+Este Web Service está habilitado para funcionar em qualquer servidor, 
+no entanto terá melhor desempenho em sites hospedados pela Via Virtual.
+Visite nosso site e conheça nossos serviços.
+Via Virtual - Solucões WEB
+http://www.viavirtual.com.br
+-->
+<title>Viavirtual.com.br: Web Service CEP</title>
+<meta name="keywords" content="cep, auto, completar, autocompletar, cep, formulario, js, javascript, web, service, via, virtual" />
+<meta name="description" content="Exemplo do tutorial que explica como implantar em formulários o auto completar endereço com base no CEP" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="robots" content="index,follow" />
+<meta name="author" content="Evanil Rosano de Paula - http://www.viavirtual.com.br" />
+<meta name="language" content="pt-br" />
+<script type="text/javascript" src="consulta.js"></script>
+<style type="text/css">
+body,td,th {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #555555;
+}
+h1  
+{
+	font-size: 13px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #2e62b1;
+	font-weight: bold;
+}
+h2  
+{
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+</style>
+</head>
+<body>
+<table align="center">
+      <tr>
+        <td colspan="2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2"><h1>EXEMPLO DO WEB SERVICE CEP</h1></td>
+      </tr>
+      <tr>
+        <td colspan="2">Demostra&ccedil;&atilde;o do Web Service CEP, permitindo implantar em <br />
+        formul&aacute;rios de sites o autocompletar com base no CEP. <br />
+        Clique <a href="http://www.viavirtual.com.br/blog/web-service-cep-autocompletar-enderecos/">aqui</a> para conhecer o tutorial completo</td>
+      </tr>
+      
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>CEP: </td>
+        <td><input name="cep" type="text" id="cep" maxlength="9"> <a style="cursor: pointer;" href="javascript: funcaowebservicecep();">completar endere&ccedil;o</a></td>
+      </tr>
+      <tr>
+        <td>Logradouro: </td>
+        <td><input id="rua" name="rua" type="text"></td>
+      </tr>
+      <tr>
+        <td>Numero: </td>
+        <td><input id="numero" name="numero" type="text"></td>
+      </tr>
+      <tr>
+        <td>Complemento: </td>
+        <td><input id="complemento" name="complemento" type="text"></td>
+      </tr>
+      <tr>
+        <td>Bairro: </td>
+        <td><input id="bairro" name="bairro" type="text"></td>
+      </tr>
+      <tr>
+        <td>Cidade: </td>
+        <td><input id="cidade" name="cidade" type="text"></td>
+      </tr>
+      <tr>
+        <td>UF: </td>
+        <td><input id="uf" name="uf" type="text" size="4"></td>
+      </tr>
+</table>
+</body>
+</html>
