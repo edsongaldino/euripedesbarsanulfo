@@ -9,6 +9,7 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/pages/dashboard.css" rel="stylesheet">
 <link href="css/pages/reports.css" rel="stylesheet">
+<link href="css/modern_admin.css" rel="stylesheet" type="text/css">
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="js/jquery-1.7.2.min.js"></script>
 <script src="js/excanvas.min.js"></script> 

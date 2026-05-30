@@ -18,8 +18,12 @@ function verifica_duplicidade($tabela, $campo, $valor) {
 }
 
 // Verifica se já existe um participante com mesmo nome e data de nascimento no mesmo evento (duplicado)
-function verifica_inscricao_duplicada($nome, $data_nascimento, $codigo_evento = 11) {
+function verifica_inscricao_duplicada($nome, $data_nascimento, $codigo_evento = null) {
 	global $conexao;
+	
+	if ($codigo_evento === null) {
+		$codigo_evento = CODIGO_EVENTO_ATIVO;
+	}
 	
 	$nome_escaped = mysqli_real_escape_string($conexao, $nome);
 	$data_escaped = mysqli_real_escape_string($conexao, $data_nascimento);

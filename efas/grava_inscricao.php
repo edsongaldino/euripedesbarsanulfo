@@ -16,7 +16,7 @@ if($_POST['acao']){
 		$data_nascimento_participante 				= protege_campo(converte_data_ingles($_POST['data_nascimento_participante']));
 		
 		// Valida duplicidade
-		$id_duplicado = verifica_inscricao_duplicada($nome_participante, $data_nascimento_participante, 11);
+		$id_duplicado = verifica_inscricao_duplicada($nome_participante, $data_nascimento_participante, CODIGO_EVENTO_ATIVO);
 		if ($id_duplicado) {
 			if (!isset($_SESSION['carrinho_inscricoes'])) {
 				$_SESSION['carrinho_inscricoes'] = [];
@@ -50,7 +50,7 @@ if($_POST['acao']){
 		
 		$data_atual = date("Y-m-d");
 		// inclui participante ao evento
-		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('11', '".$codigo_participante."', '1', '10.00', '".$data_atual."', 'C')";
+		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('".CODIGO_EVENTO_ATIVO."', '".$codigo_participante."', '1', '10.00', '".$data_atual."', 'C')";
 		$query_inclui_usuario_participante = mysqli_query($conexao,$sql_inclui_usuario_participante) or mascara_erro_mysql($sql_inclui_usuario_participante,"index.php");
 		$codigo_inscricao_evento = mysqli_insert_id($conexao);
 		
@@ -59,7 +59,7 @@ if($_POST['acao']){
 		for($i=0;$i<count($_POST['curso_crianca']);$i++){
 			$curso_id = protege_campo($_POST['curso_crianca'][$i]);
 			if (empty($curso_id)) continue;
-			$sql_inclui_curso_participante = "INSERT INTO participante_evento_curso (codigo_participante, codigo_evento, codigo_curso) VALUES ('".$codigo_participante."','11', '".$curso_id."')";
+			$sql_inclui_curso_participante = "INSERT INTO participante_evento_curso (codigo_participante, codigo_evento, codigo_curso) VALUES ('".$codigo_participante."','".CODIGO_EVENTO_ATIVO."', '".$curso_id."')";
 			$query_inclui_curso_participante = mysqli_query($conexao,$sql_inclui_curso_participante) or mascara_erro_mysql($sql_inclui_curso_participante,"index.php");
 		}
 		
@@ -93,7 +93,7 @@ if($_POST['acao']){
 		$data_nascimento_participante 				= protege_campo(converte_data_ingles($_POST['data_nascimento_participante']));
 		
 		// Valida duplicidade
-		$id_duplicado = verifica_inscricao_duplicada($nome_participante, $data_nascimento_participante, 11);
+		$id_duplicado = verifica_inscricao_duplicada($nome_participante, $data_nascimento_participante, CODIGO_EVENTO_ATIVO);
 		if ($id_duplicado) {
 			if (!isset($_SESSION['carrinho_inscricoes'])) {
 				$_SESSION['carrinho_inscricoes'] = [];
@@ -131,14 +131,14 @@ if($_POST['acao']){
 		for($i=0;$i<count($_POST['curso_participante']);$i++){
 			$curso_id = protege_campo($_POST['curso_participante'][$i]);
 			if (empty($curso_id)) continue;
-			$sql_inclui_curso_participante = "INSERT INTO participante_evento_curso (codigo_participante, codigo_evento, codigo_curso) VALUES ('".$codigo_participante."','11', '".$curso_id."')";
+			$sql_inclui_curso_participante = "INSERT INTO participante_evento_curso (codigo_participante, codigo_evento, codigo_curso) VALUES ('".$codigo_participante."','".CODIGO_EVENTO_ATIVO."', '".$curso_id."')";
 			$query_inclui_curso_participante = mysqli_query($conexao,$sql_inclui_curso_participante) or mascara_erro_mysql($sql_inclui_curso_participante,"index.php");
 		}
 		
 		$data_atual = date("Y-m-d");
 		
 		// inclui participante ao evento
-		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('11', '".$codigo_participante."', '1', '20.00', '".$data_atual."', 'A')";
+		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('".CODIGO_EVENTO_ATIVO."', '".$codigo_participante."', '1', '20.00', '".$data_atual."', 'A')";
 		$query_inclui_usuario_participante = mysqli_query($conexao,$sql_inclui_usuario_participante) or mascara_erro_mysql($sql_inclui_usuario_participante,"index.php");
 		$codigo_inscricao_evento = mysqli_insert_id($conexao);
 		
@@ -177,7 +177,7 @@ if($_POST['acao']){
 		$data_nascimento_participante 				= protege_campo(converte_data_ingles($_POST['data_nascimento_participante']));
 		
 		// Valida duplicidade
-		$id_duplicado = verifica_inscricao_duplicada($nome_participante, $data_nascimento_participante, 11);
+		$id_duplicado = verifica_inscricao_duplicada($nome_participante, $data_nascimento_participante, CODIGO_EVENTO_ATIVO);
 		if ($id_duplicado) {
 			if (!isset($_SESSION['carrinho_inscricoes'])) {
 				$_SESSION['carrinho_inscricoes'] = [];
@@ -215,14 +215,14 @@ if($_POST['acao']){
 		for($i=0;$i<count($_POST['curso_participante']);$i++){
 			$curso_id = protege_campo($_POST['curso_participante'][$i]);
 			if (empty($curso_id)) continue;
-			$sql_inclui_curso_participante = "INSERT INTO participante_evento_curso (codigo_participante, codigo_evento, codigo_curso) VALUES ('".$codigo_participante."','11', '".$curso_id."')";
+			$sql_inclui_curso_participante = "INSERT INTO participante_evento_curso (codigo_participante, codigo_evento, codigo_curso) VALUES ('".$codigo_participante."','".CODIGO_EVENTO_ATIVO."', '".$curso_id."')";
 			$query_inclui_curso_participante = mysqli_query($conexao,$sql_inclui_curso_participante) or mascara_erro_mysql($sql_inclui_curso_participante,"index.php");
 		}
 		
 		$data_atual = date("Y-m-d");
 		
 		// inclui participante ao evento
-		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('11', '".$codigo_participante."', '1', '20.00', '".$data_atual."', 'J')";
+		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('".CODIGO_EVENTO_ATIVO."', '".$codigo_participante."', '1', '20.00', '".$data_atual."', 'J')";
 		$query_inclui_usuario_participante = mysqli_query($conexao,$sql_inclui_usuario_participante) or mascara_erro_mysql($sql_inclui_usuario_participante,"index.php");
 		$codigo_inscricao_evento = mysqli_insert_id($conexao);
 		
@@ -262,7 +262,7 @@ if($_POST['acao']){
 		$data_nascimento_participante 				= protege_campo(converte_data_ingles($_POST['data_nascimento_participante']));
 		
 		// Valida duplicidade
-		$id_duplicado = verifica_inscricao_duplicada($nome_participante, $data_nascimento_participante, 11);
+		$id_duplicado = verifica_inscricao_duplicada($nome_participante, $data_nascimento_participante, CODIGO_EVENTO_ATIVO);
 		if ($id_duplicado) {
 			if (!isset($_SESSION['carrinho_inscricoes'])) {
 				$_SESSION['carrinho_inscricoes'] = [];
@@ -307,7 +307,7 @@ if($_POST['acao']){
 		$data_atual = date("Y-m-d");
 		
 		// inclui participante ao evento
-		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('11', '".$codigo_participante."', '1', '20.00', '".$data_atual."', 'T')";
+		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('".CODIGO_EVENTO_ATIVO."', '".$codigo_participante."', '1', '20.00', '".$data_atual."', 'T')";
 		$query_inclui_usuario_participante = mysqli_query($conexao,$sql_inclui_usuario_participante) or mascara_erro_mysql($sql_inclui_usuario_participante,"index.php");
 		$codigo_inscricao_evento = mysqli_insert_id($conexao);
 		

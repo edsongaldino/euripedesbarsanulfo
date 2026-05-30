@@ -12,6 +12,7 @@
 
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <link href="css/pages/signin.css" rel="stylesheet" type="text/css">
+<link href="css/modern_admin.css" rel="stylesheet" type="text/css">
 <script src="ferramenta/mascaras.js"></script>
 
 <meta name="twitter:image" content="images/logo_efas.jpg">

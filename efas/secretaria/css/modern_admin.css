@@ -1,0 +1,425 @@
+/* Modern Design Skin for EFAS Admin Dashboard */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* Font Override */
+body, p, input, button, select, textarea, .table-bordered th, .subnavbar .container > ul > li > a {
+    font-family: 'Outfit', 'Open Sans', sans-serif !important;
+}
+
+body {
+    background-color: #f8fafc !important;
+    color: #1e293b;
+}
+
+/* Global Button Styles Override */
+.btn {
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    padding: 8px 16px !important;
+    transition: all 0.2s ease !important;
+    text-shadow: none !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+    border: 1px solid #d1d5db !important;
+}
+
+.btn-primary {
+    background: #0d9488 !important; /* Teal */
+    color: #ffffff !important;
+    border: 1px solid #0f766e !important;
+}
+
+.btn-primary:hover {
+    background: #0f766e !important;
+}
+
+.btn-success {
+    background: #10b981 !important; /* Green */
+    color: #ffffff !important;
+    border: 1px solid #059669 !important;
+}
+
+.btn-success:hover {
+    background: #059669 !important;
+}
+
+.btn-danger {
+    background: #ef4444 !important; /* Red */
+    color: #ffffff !important;
+    border: 1px solid #dc2626 !important;
+}
+
+.btn-danger:hover {
+    background: #dc2626 !important;
+}
+
+/* Header & Top Bar Override */
+.navbar-fixed-top {
+    position: static;
+    margin-bottom: 0;
+}
+
+.navbar-inner {
+    background: #1e3a8a !important; /* Deep Blue */
+    padding: 10px 0 !important;
+    border: none !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+}
+
+.navbar .brand {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 1.25rem !important;
+    text-shadow: none !important;
+}
+
+.navbar .nav>li>a {
+    color: #e2e8f0 !important;
+    font-weight: 500 !important;
+    text-shadow: none !important;
+    padding: 10px 15px !important;
+}
+
+.navbar .nav>li>a:hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 6px;
+}
+
+.navbar-search .search-query {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 8px !important;
+    color: #ffffff !important;
+    font-weight: 400 !important;
+    padding: 6px 12px !important;
+    height: auto !important;
+    box-shadow: none !important;
+}
+
+.navbar-search .search-query:focus {
+    background: #ffffff !important;
+    color: #1e293b !important;
+    border-color: #0d9488 !important;
+}
+
+/* Subnavbar (Menu Navigation) Override */
+.subnavbar {
+    margin-bottom: 2em !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.subnavbar-inner {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    height: auto !important;
+    padding: 0 !important;
+}
+
+.subnavbar .container > ul {
+    height: auto !important;
+    display: flex !important;
+    gap: 8px !important;
+}
+
+.subnavbar .container > ul > li {
+    border: none !important;
+    height: auto !important;
+    min-width: unset !important;
+    margin: 4px 0 !important;
+}
+
+.subnavbar .container > ul > li > a {
+    color: #64748b !important;
+    font-weight: 500 !important;
+    padding: 12px 18px !important;
+    border-radius: 8px !important;
+    height: auto !important;
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease !important;
+}
+
+.subnavbar .container > ul > li > a > i {
+    font-size: 16px !important;
+    margin: 0 !important;
+    color: #94a3b8 !important;
+}
+
+.subnavbar .container > ul > li > a:hover {
+    color: #0d9488 !important;
+    background: #f1f5f9 !important;
+}
+
+.subnavbar .container > ul > li > a:hover i {
+    color: #0d9488 !important;
+}
+
+.subnavbar .container > ul > li.active > a {
+    background: rgba(13, 148, 136, 0.08) !important;
+    color: #0d9488 !important;
+    border: none !important;
+}
+
+.subnavbar .container > ul > li.active > a i {
+    color: #0d9488 !important;
+}
+
+.subnavbar .container > ul > li > a > span {
+    display: inline !important;
+}
+
+/* Widgets / Cards Layout Override */
+.widget {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02) !important;
+    margin-bottom: 24px !important;
+}
+
+.widget-header {
+    background: #ffffff !important;
+    height: 52px !important;
+    line-height: 52px !important;
+    border: none !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    padding: 0 16px !important;
+}
+
+.widget-header h3 {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    text-shadow: none !important;
+    left: 0 !important;
+    margin: 0 !important;
+}
+
+.widget-header i {
+    font-size: 16px !important;
+    color: #64748b !important;
+    margin-left: 0 !important;
+    margin-right: 8px !important;
+    vertical-align: middle;
+}
+
+.widget-content {
+    border: none !important;
+    padding: 24px !important;
+    background: #ffffff !important;
+}
+
+/* Filters and Search Override */
+.widget-busca {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    height: auto !important;
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.widget-busca h3 {
+    margin-bottom: 16px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    display: block !important;
+    text-shadow: none !important;
+    left: 0 !important;
+}
+
+.widget-busca form {
+    margin: 0 !important;
+}
+
+.widget-busca .control-group {
+    margin-bottom: 0 !important;
+}
+
+.widget-busca .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Form inputs & Selects Override */
+input[type="text"], input[type="password"], select, textarea {
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+    color: #334155 !important;
+    background-color: #ffffff !important;
+    box-shadow: none !important;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+    height: auto !important;
+    line-height: normal !important;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:focus {
+    border-color: #0d9488 !important;
+    outline: 0 !important;
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15) !important;
+}
+
+.widget-busca form input, .widget-busca form select {
+    margin: 0 !important;
+    width: auto !important;
+}
+
+.widget-busca form .buscar {
+    float: none !important;
+    margin: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 8px 24px !important;
+}
+
+/* Table Override */
+.table {
+    margin-bottom: 0 !important;
+}
+
+.table-bordered {
+    border: none !important;
+}
+
+.table-bordered th {
+    background: #f1f5f9 !important;
+    color: #475569 !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px;
+    border: none !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+    padding: 12px 16px !important;
+}
+
+.table-bordered td {
+    border: none !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    padding: 14px 16px !important;
+    color: #334155 !important;
+    font-size: 13px !important;
+}
+
+.table-striped tbody tr:nth-child(odd) td {
+    background-color: #f8fafc !important;
+}
+
+.table-bordered tbody tr:hover td {
+    background-color: #f1f5f9 !important;
+}
+
+/* Actions Column UI */
+.td-actions {
+    text-align: right !important;
+}
+
+.td-actions .btn {
+    padding: 4px 8px !important;
+    margin-left: 4px;
+    background: #ffffff !important;
+    color: #475569 !important;
+    border-color: #cbd5e1 !important;
+}
+
+.td-actions .btn:hover {
+    color: #0d9488 !important;
+    border-color: #0d9488 !important;
+    background: rgba(13, 148, 136, 0.05) !important;
+}
+
+/* Total stats label */
+.total {
+    margin: 12px 0 !important;
+    font-size: 13px !important;
+    color: #64748b !important;
+    font-weight: 500;
+}
+
+.total_consulta {
+    color: #0d9488 !important;
+    font-weight: 700 !important;
+}
+
+/* Login Screen Override */
+.account-container {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+    padding: 30px !important;
+    margin-top: 40px !important;
+}
+
+.account-container h1 {
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin-bottom: 8px !important;
+}
+
+.account-container h3 {
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    color: #64748b !important;
+    margin-bottom: 24px !important;
+}
+
+.account-container h3 a {
+    color: #0d9488 !important;
+    font-weight: 600;
+}
+
+.account-container .field {
+    margin-bottom: 16px !important;
+}
+
+.account-container .field label {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #64748b !important;
+    text-transform: uppercase;
+    margin-bottom: 6px !important;
+}
+
+.account-container .field input {
+    width: 100% !important;
+    height: auto !important;
+    padding: 10px 14px !important;
+}
+
+.login-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px !important;
+}
+
+.login-actions .btn {
+    width: auto !important;
+    padding: 10px 24px !important;
+    height: auto !important;
+}
+
+/* Footer Override */
+.footer-inner {
+    background: #0f172a !important;
+    border-top: 1px solid #1e293b !important;
+    color: #64748b !important;
+    padding: 24px 0 !important;
+}
+
+.footer a {
+    color: #94a3b8 !important;
+    font-weight: 500;
+}
+
+.footer a:hover {
+    color: #ffffff !important;
+}

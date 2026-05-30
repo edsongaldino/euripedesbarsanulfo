@@ -26,7 +26,7 @@
 		<div class="content-top">
 			<div class="col-md-7 content-top1">
 				<h3>Encontro Fraterno Auta de Souza</h3>
-				<p>O EFAS - Encontro Fraterno Auta de Souza é um evento espírita que proporciona aos seus participantes a troca de experiências, estudo da Doutrina Espírta e trabalho no campo do bem. O EFAS oportuniza às varias cidades que o sediam, uma chuva de luz e bênçãos incentivando os trabalhadores espíritas, em suas tarefas, a implantação de várias atividades assistenciais e doutrinárias.<br/> Neste ano, o EFAS será realizado nos dias 08 e 09 de Outubro na Escola Estadual Prof. Fernando Leite De Campos, localizada na Av. Alzira Santana, 347 - Nova Várzea Grande, Várzea Grande - MT <br/> <b>Venha participar conosco deste evento de luz!</b></p>
+				<p>O EFAS - Encontro Fraterno Auta de Souza é um evento espírita que proporciona aos seus participantes a troca de experiências, estudo da Doutrina Espírta e trabalho no campo do bem. O EFAS oportuniza às varias cidades que o sediam, uma chuva de luz e bênçãos incentivando os trabalhadores espíritas, em suas tarefas, a implantação de várias atividades assistenciais e doutrinárias.<br/> Neste ano, o EFAS será realizado nos dias 04 e 05 de Julho na Escola Estadual Prof. Fernando Leite De Campos, localizada na Av. Alzira Santana, 347 - Nova Várzea Grande, Várzea Grande - MT <br/> <b>Venha participar conosco deste evento de luz!</b></p>
 			</div>
 			<div class="col-md-5 top-col">
 				<div class="pillars-grid">

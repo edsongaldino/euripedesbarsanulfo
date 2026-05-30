@@ -13,7 +13,7 @@
             -->
 
             <li>
-                <img src="images/bannerefas2024.jpg" draggable="false">
+                <img src="images/bannerefas2026.jpg" draggable="false">
             </li>
             
         </ul>

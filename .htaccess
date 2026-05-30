@@ -1,0 +1,4 @@
+RewriteEngine On
+
+# Redireciona o link do QR Code para o portal de inscrição do evento ativo (ID 12)
+RewriteRule ^inscricao-efas/?$ https://efas.euripedesbarsanulfo.org.br/?evento=12 [R=301,L,NC]

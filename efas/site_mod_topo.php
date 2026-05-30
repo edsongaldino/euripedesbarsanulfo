@@ -8,7 +8,7 @@ $isInscricao = (
 );
 ?>
 <div class="logo">
-    <h1><a href="index.php">EFAS MT</a></h1>
+    <h1><a href="index.php">5896º EFAS VG</a></h1>
 </div>
 <div class="top-nav">
     <span class="menu"><img src="images/menu.png" alt=""> </span>
