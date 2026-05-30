@@ -2,7 +2,8 @@
 // Define custom error log or output for debugging
 ini_set('display_errors', 0);
 
-include("sistema_mod_include.php");
+include("ferramenta/configuracoes.php");
+include("ferramenta/funcao_php.php");
 $conexao = conecta_mysql();
 
 // Log webhook request
@@ -19,18 +20,16 @@ file_put_contents($log_file, "[$date] Payload: $raw_payload | GET: " . json_enco
 // Identificar o ID do pagamento
 $payment_id = null;
 
-// Webhook / IPN
-if (isset($_GET['data_id'])) {
+// Webhook / IPN (Prioritize JSON POST body payload details)
+$data = json_decode($raw_payload, true);
+if (isset($data['data']['id'])) {
+    $payment_id = $data['data']['id'];
+} elseif (isset($data['id'])) {
+    $payment_id = $data['id'];
+} elseif (isset($_GET['data_id'])) {
     $payment_id = $_GET['data_id'];
 } elseif (isset($_GET['id'])) {
     $payment_id = $_GET['id'];
-} else {
-    $data = json_decode($raw_payload, true);
-    if (isset($data['data']['id'])) {
-        $payment_id = $data['data']['id'];
-    } elseif (isset($data['id'])) {
-        $payment_id = $data['id'];
-    }
 }
 
 if (!$payment_id) {
@@ -57,6 +56,7 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "Authorization: Bearer " . $access_token
 ]);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Evita hangs e 502/504 se a API do MP demorar a responder
 
 $response = curl_exec($ch);
 $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -97,13 +97,17 @@ if (isset($payment['status']) && $payment['status'] === 'approved' && isset($pay
         $ids_escaped = array_map('intval', $ids);
         $ids_str = implode(',', $ids_escaped);
         
-        $sql_update = "UPDATE inscricao_evento SET codigo_situacao_inscricao = 2 WHERE codigo_inscricao_evento IN ($ids_str)";
-        $query_update = mysqli_query($conexao, $sql_update);
-        
-        if ($query_update) {
-            file_put_contents($log_file, "[$date] SUCCESS: Updated status to 2 for IDs: $ids_str\n", FILE_APPEND);
+        if ($conexao) {
+            $sql_update = "UPDATE inscricao_evento SET codigo_situacao_inscricao = 2 WHERE codigo_inscricao_evento IN ($ids_str)";
+            $query_update = mysqli_query($conexao, $sql_update);
+            
+            if ($query_update) {
+                file_put_contents($log_file, "[$date] SUCCESS: Updated status to 2 for IDs: $ids_str\n", FILE_APPEND);
+            } else {
+                file_put_contents($log_file, "[$date] ERROR: Database update failed for IDs: $ids_str | Error: " . mysqli_error($conexao) . "\n", FILE_APPEND);
+            }
         } else {
-            file_put_contents($log_file, "[$date] ERROR: Database update failed for IDs: $ids_str\n", FILE_APPEND);
+            file_put_contents($log_file, "[$date] ERROR: Database connection was not established. Cannot update IDs: $ids_str\n", FILE_APPEND);
         }
     } else {
         file_put_contents($log_file, "[$date] WARNING: No valid IDs parsed from external_reference: $ext_ref\n", FILE_APPEND);
