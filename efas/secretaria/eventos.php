@@ -29,6 +29,8 @@ if (isset($_POST["acao"])) {
         $descricao_evento = protege_campo($_POST['descricao_evento']);
         $local_evento = protege_campo($_POST['local_evento']);
         $codigo_cidade = (int)$_POST['codigo_cidade'];
+        $valor_inscricao_adulto = (float)$_POST['valor_inscricao_adulto'];
+        $valor_inscricao_crianca = (float)$_POST['valor_inscricao_crianca'];
 
         if ($codigo_evento > 0) {
             $sql = "UPDATE evento SET 
@@ -37,12 +39,14 @@ if (isset($_POST["acao"])) {
                         data_final_evento = '$data_final_evento', 
                         descricao_evento = '$descricao_evento', 
                         local_evento = '$local_evento', 
-                        codigo_cidade = $codigo_cidade 
+                        codigo_cidade = $codigo_cidade,
+                        valor_inscricao_adulto = $valor_inscricao_adulto,
+                        valor_inscricao_crianca = $valor_inscricao_crianca
                     WHERE codigo_evento = $codigo_evento";
             $query = mysqli_query($conexao, $sql);
         } else {
-            $sql = "INSERT INTO evento (nome_evento, data_inicial_evento, data_final_evento, descricao_evento, local_evento, codigo_cidade) 
-                    VALUES ('$nome_evento', '$data_inicial_evento', '$data_final_evento', '$descricao_evento', '$local_evento', $codigo_cidade)";
+            $sql = "INSERT INTO evento (nome_evento, data_inicial_evento, data_final_evento, descricao_evento, local_evento, codigo_cidade, valor_inscricao_adulto, valor_inscricao_crianca) 
+                    VALUES ('$nome_evento', '$data_inicial_evento', '$data_final_evento', '$descricao_evento', '$local_evento', $codigo_cidade, $valor_inscricao_adulto, $valor_inscricao_crianca)";
             $query = mysqli_query($conexao, $sql);
         }
 
@@ -298,6 +302,8 @@ if ($sub == 'vincular' && isset($_GET['codigo_evento'])) {
             $val_local = ($sub == 'editar') ? htmlspecialchars($evento_editar['local_evento']) : '';
             $val_cidade = ($sub == 'editar') ? (int)$evento_editar['codigo_cidade'] : 0;
             $val_desc = ($sub == 'editar') ? htmlspecialchars($evento_editar['descricao_evento']) : '';
+            $val_valor_adulto = ($sub == 'editar') ? (float)$evento_editar['valor_inscricao_adulto'] : 20.00;
+            $val_valor_crianca = ($sub == 'editar') ? (float)$evento_editar['valor_inscricao_crianca'] : 10.00;
         ?>
             <!-- Form Novo / Editar Evento -->
             <div class="widget">
@@ -334,6 +340,20 @@ if ($sub == 'vincular' && isset($_GET['codigo_evento'])) {
                             <label class="control-label" for="local_evento">Local de Realização</label>
                             <div class="controls">
                                 <input type="text" class="span6" id="local_evento" name="local_evento" value="<?php echo $val_local; ?>" placeholder="Ex: Escola Estadual Fernando Leite">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="valor_inscricao_adulto">Inscrição Adulto / Jovem / Trabalhador (R$)</label>
+                            <div class="controls">
+                                <input type="number" step="0.01" min="0" class="span2" id="valor_inscricao_adulto" name="valor_inscricao_adulto" value="<?php echo $val_valor_adulto; ?>" required placeholder="Ex: 20.00" style="height: 38px;">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="valor_inscricao_crianca">Inscrição Criança (R$)</label>
+                            <div class="controls">
+                                <input type="number" step="0.01" min="0" class="span2" id="valor_inscricao_crianca" name="valor_inscricao_crianca" value="<?php echo $val_valor_crianca; ?>" required placeholder="Ex: 10.00" style="height: 38px;">
                             </div>
                         </div>
 

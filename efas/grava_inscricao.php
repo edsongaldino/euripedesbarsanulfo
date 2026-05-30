@@ -6,6 +6,16 @@ require_once("ferramenta/PHPMailer/class.phpmailer.php");
 
 $conexao = conecta_mysql();
 
+// Buscar valores de inscrição do evento ativo
+$valor_adulto = 20.00;
+$valor_crianca = 10.00;
+$sql_precos = "SELECT valor_inscricao_adulto, valor_inscricao_crianca FROM evento WHERE codigo_evento = '" . CODIGO_EVENTO_ATIVO . "' LIMIT 1";
+$query_precos = mysqli_query($conexao, $sql_precos);
+if ($query_precos && $row_precos = mysqli_fetch_assoc($query_precos)) {
+    $valor_adulto = (float)$row_precos['valor_inscricao_adulto'];
+    $valor_crianca = (float)$row_precos['valor_inscricao_crianca'];
+}
+
 if($_POST['acao']){
 
 	if(campo_form_decodifica($_POST['acao']) == "gravar_participante_crianca") {
@@ -50,7 +60,7 @@ if($_POST['acao']){
 		
 		$data_atual = date("Y-m-d");
 		// inclui participante ao evento
-		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('".CODIGO_EVENTO_ATIVO."', '".$codigo_participante."', '1', '10.00', '".$data_atual."', 'C')";
+		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('".CODIGO_EVENTO_ATIVO."', '".$codigo_participante."', '1', '".$valor_crianca."', '".$data_atual."', 'C')";
 		$query_inclui_usuario_participante = mysqli_query($conexao,$sql_inclui_usuario_participante) or mascara_erro_mysql($sql_inclui_usuario_participante,"index.php");
 		$codigo_inscricao_evento = mysqli_insert_id($conexao);
 		
@@ -138,7 +148,7 @@ if($_POST['acao']){
 		$data_atual = date("Y-m-d");
 		
 		// inclui participante ao evento
-		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('".CODIGO_EVENTO_ATIVO."', '".$codigo_participante."', '1', '20.00', '".$data_atual."', 'A')";
+		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('".CODIGO_EVENTO_ATIVO."', '".$codigo_participante."', '1', '".$valor_adulto."', '".$data_atual."', 'A')";
 		$query_inclui_usuario_participante = mysqli_query($conexao,$sql_inclui_usuario_participante) or mascara_erro_mysql($sql_inclui_usuario_participante,"index.php");
 		$codigo_inscricao_evento = mysqli_insert_id($conexao);
 		
@@ -222,7 +232,7 @@ if($_POST['acao']){
 		$data_atual = date("Y-m-d");
 		
 		// inclui participante ao evento
-		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('".CODIGO_EVENTO_ATIVO."', '".$codigo_participante."', '1', '20.00', '".$data_atual."', 'J')";
+		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('".CODIGO_EVENTO_ATIVO."', '".$codigo_participante."', '1', '".$valor_adulto."', '".$data_atual."', 'J')";
 		$query_inclui_usuario_participante = mysqli_query($conexao,$sql_inclui_usuario_participante) or mascara_erro_mysql($sql_inclui_usuario_participante,"index.php");
 		$codigo_inscricao_evento = mysqli_insert_id($conexao);
 		
@@ -307,7 +317,7 @@ if($_POST['acao']){
 		$data_atual = date("Y-m-d");
 		
 		// inclui participante ao evento
-		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('".CODIGO_EVENTO_ATIVO."', '".$codigo_participante."', '1', '20.00', '".$data_atual."', 'T')";
+		$sql_inclui_usuario_participante = "INSERT INTO inscricao_evento (codigo_evento, codigo_participante, codigo_situacao_inscricao, valor_inscricao_evento, data_inscricao_evento, tipo_inscricao) VALUES ('".CODIGO_EVENTO_ATIVO."', '".$codigo_participante."', '1', '".$valor_adulto."', '".$data_atual."', 'T')";
 		$query_inclui_usuario_participante = mysqli_query($conexao,$sql_inclui_usuario_participante) or mascara_erro_mysql($sql_inclui_usuario_participante,"index.php");
 		$codigo_inscricao_evento = mysqli_insert_id($conexao);
 		
