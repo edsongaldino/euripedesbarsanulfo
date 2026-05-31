@@ -597,3 +597,58 @@ a {
     text-decoration: underline !important;
 }
 
+/* --- Autocomplete Dropdown Custom Styles --- */
+.ui-autocomplete {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+    padding: 8px 0 !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    z-index: 9999 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.ui-autocomplete .ui-menu-item {
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+.ui-autocomplete .ui-menu-item a,
+.ui-autocomplete .ui-menu-item .ui-menu-item-wrapper {
+    display: block !important;
+    padding: 12px 16px !important;
+    color: #1e293b !important;
+    font-size: 1em !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+    border: none !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+}
+
+.ui-autocomplete .ui-menu-item a.ui-state-focus,
+.ui-autocomplete .ui-menu-item .ui-menu-item-wrapper.ui-state-active,
+.ui-autocomplete .ui-menu-item .ui-menu-item-wrapper:hover {
+    background-color: #f1f5f9 !important;
+    color: #0284c7 !important;
+}
+
+/* --- Responsive Form Layout (Mobile) --- */
+@media (max-width: 768px) {
+    .contact-grids {
+        padding: 20px 15px !important;
+        border-radius: 12px !important;
+    }
+    .contact {
+        padding: 20px 0 !important;
+    }
+    .in-contact {
+        padding: 0 10px !important;
+        margin-bottom: 15px !important;
+    }
+}
+
+

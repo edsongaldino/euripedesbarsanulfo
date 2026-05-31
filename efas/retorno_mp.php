@@ -8,14 +8,26 @@ $conexao = conecta_mysql();
 
 // Log webhook request
 $log_dir = __DIR__ . '/ferramenta/tmp';
-if (!is_dir($log_dir)) {
-    mkdir($log_dir, 0755, true);
-}
 $log_file = $log_dir . '/mercadopago_webhook.log';
 
+function log_msg($msg) {
+    global $log_dir, $log_file;
+    $date = date('Y-m-d H:i:s');
+    $formatted_msg = "[$date] $msg\n";
+    
+    // Ensure dir exists
+    if (!is_dir($log_dir)) {
+        @mkdir($log_dir, 0755, true);
+    }
+    
+    // Try to write to local log file first, fallback to PHP system error log
+    if (!is_writable($log_dir) || @file_put_contents($log_file, $formatted_msg, FILE_APPEND) === false) {
+        error_log("MercadoPago Webhook: " . trim($msg));
+    }
+}
+
 $raw_payload = file_get_contents('php://input');
-$date = date('Y-m-d H:i:s');
-file_put_contents($log_file, "[$date] Payload: $raw_payload | GET: " . json_encode($_GET) . "\n", FILE_APPEND);
+log_msg("Payload received: " . ($raw_payload ?: 'empty') . " | GET: " . json_encode($_GET));
 
 // Identificar o ID do pagamento
 $payment_id = null;
@@ -33,7 +45,7 @@ if (isset($data['data']['id'])) {
 }
 
 if (!$payment_id) {
-    file_put_contents($log_file, "[$date] ERROR: Payment ID not found in payload.\n", FILE_APPEND);
+    log_msg("ERROR: Payment ID not found in payload.");
     http_response_code(400);
     echo "Payment ID not found.";
     exit;
@@ -42,7 +54,7 @@ if (!$payment_id) {
 // Consultar o pagamento na API do Mercado Pago
 $access_token = defined('MP_ACCESS_TOKEN') ? MP_ACCESS_TOKEN : '';
 if (empty($access_token) || $access_token === "SEU_ACCESS_TOKEN_AQUI") {
-    file_put_contents($log_file, "[$date] ERROR: MP_ACCESS_TOKEN not configured.\n", FILE_APPEND);
+    log_msg("ERROR: MP_ACCESS_TOKEN not configured.");
     http_response_code(500);
     echo "Mercado Pago Access Token not configured.";
     exit;
@@ -63,14 +75,21 @@ $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
 if ($http_code !== 200) {
-    file_put_contents($log_file, "[$date] ERROR: Failed to fetch payment details from MP. HTTP CODE: $http_code | Response: $response\n", FILE_APPEND);
-    http_response_code(500);
-    echo "Failed to fetch payment details.";
+    log_msg("ERROR: Failed to fetch payment details from MP. HTTP CODE: $http_code | Response: $response");
+    
+    // Se for um erro do cliente (ex: 404 Not Found), retornar 202 para o MP parar de tentar enviar
+    if ($http_code >= 400 && $http_code < 500) {
+        http_response_code(202);
+        echo "Accepted but could not process (client error).";
+    } else {
+        http_response_code(500);
+        echo "Failed to fetch payment details.";
+    }
     exit;
 }
 
 $payment = json_decode($response, true);
-file_put_contents($log_file, "[$date] INFO: Payment status: " . ($payment['status'] ?? 'unknown') . " | Ref: " . ($payment['external_reference'] ?? 'none') . "\n", FILE_APPEND);
+log_msg("INFO: Payment status: " . ($payment['status'] ?? 'unknown') . " | Ref: " . ($payment['external_reference'] ?? 'none'));
 
 if (isset($payment['status']) && $payment['status'] === 'approved' && isset($payment['external_reference'])) {
     $ext_ref = $payment['external_reference'];
@@ -102,18 +121,19 @@ if (isset($payment['status']) && $payment['status'] === 'approved' && isset($pay
             $query_update = mysqli_query($conexao, $sql_update);
             
             if ($query_update) {
-                file_put_contents($log_file, "[$date] SUCCESS: Updated status to 2 for IDs: $ids_str\n", FILE_APPEND);
+                log_msg("SUCCESS: Updated status to 2 for IDs: $ids_str");
             } else {
-                file_put_contents($log_file, "[$date] ERROR: Database update failed for IDs: $ids_str | Error: " . mysqli_error($conexao) . "\n", FILE_APPEND);
+                log_msg("ERROR: Database update failed for IDs: $ids_str | Error: " . mysqli_error($conexao));
             }
         } else {
-            file_put_contents($log_file, "[$date] ERROR: Database connection was not established. Cannot update IDs: $ids_str\n", FILE_APPEND);
+            log_msg("ERROR: Database connection was not established. Cannot update IDs: $ids_str");
         }
     } else {
-        file_put_contents($log_file, "[$date] WARNING: No valid IDs parsed from external_reference: $ext_ref\n", FILE_APPEND);
+        log_msg("WARNING: No valid IDs parsed from external_reference: $ext_ref");
     }
 }
 
 fecha_mysql($conexao);
 http_response_code(200);
 echo "OK";
+?>

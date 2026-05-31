@@ -31,7 +31,9 @@
 	$query_opcoes_pes_rap = mysqli_query($conexao, $sql_opcoes_pes_rap);
 
 	while($executa_opcoes_pes_rap = mysqli_fetch_assoc($query_opcoes_pes_rap)) {
-		$opcoes_pes_rap[] = '"'.utf8_encode($executa_opcoes_pes_rap['nome_participante']).'"';
+		$nome_limpo = fix_double_utf8($executa_opcoes_pes_rap['nome_participante']);
+		$nome_limpo = str_replace(array('\\', '"'), array('\\\\', '\"'), $nome_limpo);
+		$opcoes_pes_rap[] = '"'.$nome_limpo.'"';
 	}
 
 	echo "[".implode(",",$opcoes_pes_rap)."]";

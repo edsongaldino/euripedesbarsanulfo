@@ -20,6 +20,8 @@ function gerar_pagamento_mp($itens_ou_id, $nome_participante = null, $valor_insc
     );
     if ($is_local) {
         $back_domain = "https://efas.euripedesbarsanulfo.org.br";
+    } else {
+        $back_domain = str_replace("http://", "https://", $back_domain);
     }
 
     // Normalizar itens para suportar tanto array de múltiplos itens quanto parâmetros estáticos legados

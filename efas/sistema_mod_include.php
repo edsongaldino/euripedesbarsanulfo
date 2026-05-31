@@ -26,4 +26,17 @@ if (!defined('CODIGO_EVENTO_ATIVO')) {
 }
 
 ini_set('display_errors', 0);
+
+function fix_double_utf8($str) {
+    if ($str === null || $str === '') {
+        return $str;
+    }
+    if (mb_check_encoding($str, 'UTF-8')) {
+        $decoded = utf8_decode($str);
+        if (mb_check_encoding($decoded, 'UTF-8') && $decoded !== $str && preg_match('//u', $decoded)) {
+            return $decoded;
+        }
+    }
+    return $str;
+}
 ?>
