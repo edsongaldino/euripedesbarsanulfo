@@ -157,7 +157,7 @@ if ($tem_pendentes && !empty($itens_pendentes)) {
         </div>
 
 		<div class="alert alert-info" role="alert">
-			<strong>À partir do dia 05/SET o pagamento só poderá ser feito no dia do evento! Agradecemos pela sua inscrição antecipada.</strong>
+			<strong>À partir do dia 30/Junho o pagamento só poderá ser feito no dia do evento! Agradecemos pela sua inscrição antecipada.</strong>
 		</div>
 
 		
