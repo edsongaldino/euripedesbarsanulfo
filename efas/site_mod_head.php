@@ -46,6 +46,83 @@
     </script>
 
     <script type="text/javascript">
+    $(document).ready(function() {
+        // 1. Pre-fill form fields from URL params if they exist (used after category redirect)
+        var params = new URLSearchParams(window.location.search);
+        if (params.has('nome')) $("#nome_participante").val(params.get('nome'));
+        if (params.has('cracha')) $("#nome_participante_cracha").val(params.get('cracha'));
+        if (params.has('email')) $("#email_participante").val(params.get('email'));
+        if (params.has('centro')) $("#centro_espirita_participante").val(params.get('centro'));
+        if (params.has('nasc')) $("#data-nascimento").val(params.get('nasc'));
+        if (params.has('fone')) {
+            var foneVal = params.get('fone');
+            if ($("#telefone_participante").length) {
+                $("#telefone_participante").val(foneVal);
+            } else if ($("#telefone_responsavel").length) {
+                $("#telefone_responsavel").val(foneVal);
+            }
+        }
+
+        // 2. Validate age when birth date is entered/changed
+        $(document).on('blur change', '#data-nascimento', function() {
+            var value = $(this).val();
+            if (!value || value.indexOf('_') !== -1 || value.length < 10) return;
+
+            var partes = value.split('/');
+            if (partes.length !== 3) return;
+            var diaNasc = parseInt(partes[0], 10);
+            var mesNasc = parseInt(partes[1], 10);
+            var anoNasc = parseInt(partes[2], 10);
+
+            if (isNaN(diaNasc) || isNaN(mesNasc) || isNaN(anoNasc)) return;
+
+            // Calculate age relative to current date
+            var hoje = new Date();
+            var diaHoje = hoje.getDate();
+            var mesHoje = hoje.getMonth() + 1;
+            var anoHoje = hoje.getFullYear();
+
+            var idade = anoHoje - anoNasc;
+            if (mesHoje < mesNasc || (mesHoje === mesNasc && diaHoje < diaNasc)) {
+                idade--;
+            }
+
+            var currentPage = window.location.pathname.split('/').pop();
+            var targetPage = "";
+            var categoryName = "";
+
+            if (idade <= 11) {
+                targetPage = "inscricao_crianca.php";
+                categoryName = "Crianças (0 a 11 anos)";
+            } else if (idade === 12 || idade === 13) {
+                targetPage = "inscricao_jovem.php";
+                categoryName = "Jovens (12 e 13 anos)";
+            } else {
+                // Age >= 14
+                // Workers should be >= 14, but they can register on workers page if they are already on it
+                if (currentPage === "inscricao_trabalhador.php") {
+                    return;
+                }
+                targetPage = "inscricao_adulto.php";
+                categoryName = "Adultos (a partir de 14 anos)";
+            }
+
+            // Redirect if current page does not match expected category
+            if (currentPage !== targetPage) {
+                alert("Com base na data de nascimento, a idade do participante é de " + idade + " anos.\n\nA categoria correta para esta idade é: " + categoryName + ".\nVamos redirecionar você para a página correspondente.");
+                
+                // Collect already filled data
+                var nome = encodeURIComponent($("#nome_participante").val() || "");
+                var cracha = encodeURIComponent($("#nome_participante_cracha").val() || "");
+                var fone = encodeURIComponent($("#telefone_participante").val() || $("#telefone_responsavel").val() || "");
+                var email = encodeURIComponent($("#email_participante").val() || "");
+                var centro = encodeURIComponent($("#centro_espirita_participante").val() || "");
+                var nasc = encodeURIComponent(value);
+
+                window.location.href = targetPage + "?nome=" + nome + "&cracha=" + cracha + "&fone=" + fone + "&email=" + email + "&centro=" + centro + "&nasc=" + nasc;
+            }
+        });
+    });
 
     function mascara(telefone){ 
 
