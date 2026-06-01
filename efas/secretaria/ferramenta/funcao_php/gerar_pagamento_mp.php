@@ -10,18 +10,19 @@ function gerar_pagamento_mp($itens_ou_id, $nome_participante = null, $valor_insc
         return false;
     }
 
-    // Se o domínio for local, o Mercado Pago rejeita auto_return com URLs locais.
-    // Usamos um domínio público de fallback para permitir gerar a preferência em testes locais.
-    $back_domain = DOMINIO;
+    // Detectar host e is_local
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
     $is_local = (
-        strpos($_SERVER['HTTP_HOST'] ?? '', 'localhost') !== false ||
-        strpos($_SERVER['HTTP_HOST'] ?? '', '127.0.0.1') !== false ||
-        strpos($_SERVER['HTTP_HOST'] ?? '', '.test') !== false
+        strpos($host, 'localhost') !== false ||
+        strpos($host, '127.0.0.1') !== false ||
+        strpos($host, '.test') !== false
     );
+    
+    // Obter o domínio base forçando HTTPS para produção para evitar redirecionamento (POST -> GET vazio)
     if ($is_local) {
         $back_domain = "https://efas.euripedesbarsanulfo.org.br";
     } else {
-        $back_domain = str_replace("http://", "https://", $back_domain);
+        $back_domain = "https://" . $host;
     }
 
     // Normalizar itens para suportar tanto array de múltiplos itens quanto parâmetros estáticos legados
