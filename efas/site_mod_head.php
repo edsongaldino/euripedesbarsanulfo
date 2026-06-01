@@ -109,8 +109,6 @@
 
             // Redirect if current page does not match expected category
             if (currentPage !== targetPage) {
-                alert("Com base na data de nascimento, a idade do participante é de " + idade + " anos.\n\nA categoria correta para esta idade é: " + categoryName + ".\nVamos redirecionar você para a página correspondente.");
-                
                 // Collect already filled data
                 var nome = encodeURIComponent($("#nome_participante").val() || "");
                 var cracha = encodeURIComponent($("#nome_participante_cracha").val() || "");
@@ -119,10 +117,140 @@
                 var centro = encodeURIComponent($("#centro_espirita_participante").val() || "");
                 var nasc = encodeURIComponent(value);
 
-                window.location.href = targetPage + "?nome=" + nome + "&cracha=" + cracha + "&fone=" + fone + "&email=" + email + "&centro=" + centro + "&nasc=" + nasc;
+                var redirectUrl = targetPage + "?nome=" + nome + "&cracha=" + cracha + "&fone=" + fone + "&email=" + email + "&centro=" + centro + "&nasc=" + nasc;
+
+                showCategoryAlert(idade, categoryName, targetPage, redirectUrl);
             }
         });
     });
+
+    function showCategoryAlert(idade, categoryName, targetPage, redirectUrl) {
+        $("#custom-age-modal").remove();
+
+        var modalHtml = `
+            <div id="custom-age-modal" style="
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(15, 23, 42, 0.6);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                font-family: 'Inter', sans-serif;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            ">
+                <div style="
+                    background: #ffffff;
+                    border-radius: 16px;
+                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+                    width: 90%;
+                    max-width: 450px;
+                    padding: 30px;
+                    text-align: center;
+                    border: 1px solid #e2e8f0;
+                    transform: scale(0.9);
+                    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                ">
+                    <div style="
+                        width: 60px;
+                        height: 60px;
+                        background: #fef3c7;
+                        color: #d97706;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0 auto 20px;
+                        font-size: 28px;
+                    ">
+                        ⚠️
+                    </div>
+                    
+                    <h3 style="
+                        font-family: 'Montserrat', sans-serif !important;
+                        font-weight: 800 !important;
+                        font-size: 1.35em !important;
+                        color: #0f172a !important;
+                        margin-bottom: 12px !important;
+                        text-transform: none !important;
+                    ">Categoria Incorreta</h3>
+                    
+                    <p style="
+                        color: #475569 !important;
+                        font-size: 0.98em !important;
+                        line-height: 1.6 !important;
+                        margin-bottom: 20px !important;
+                    ">
+                        Com base na data de nascimento, o participante tem <strong>${idade} anos</strong>.<br><br>
+                        A categoria correta é:<br>
+                        <span style="
+                            display: inline-block;
+                            background: #f0fdf4;
+                            color: #16a34a;
+                            padding: 6px 12px;
+                            border-radius: 6px;
+                            font-weight: 700;
+                            margin-top: 5px;
+                            font-size: 1.05em;
+                            border: 1px solid #bbf7d0;
+                        ">${categoryName}</span>
+                    </p>
+                    
+                    <p style="
+                        color: #64748b !important;
+                        font-size: 0.9em !important;
+                        margin-bottom: 25px !important;
+                    ">
+                        Vamos redirecionar você e manter os dados já preenchidos.
+                    </p>
+                    
+                    <button id="custom-age-modal-btn" style="
+                        background: #0284c7;
+                        color: #ffffff;
+                        border: none;
+                        border-radius: 8px;
+                        padding: 12px 30px;
+                        font-family: 'Montserrat', sans-serif;
+                        font-size: 1em;
+                        font-weight: 700;
+                        cursor: pointer;
+                        width: 100%;
+                        box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.2);
+                        transition: all 0.2s ease;
+                        outline: none;
+                    ">
+                        Ir para Categoria Correta
+                    </button>
+                </div>
+            </div>
+        `;
+
+        $("body").append(modalHtml);
+
+        setTimeout(function() {
+            $("#custom-age-modal").css("opacity", "1");
+            $("#custom-age-modal > div").css("transform", "scale(1)");
+        }, 10);
+
+        $("#custom-age-modal-btn").hover(
+            function() { $(this).css("background", "#0369a1"); },
+            function() { $(this).css("background", "#0284c7"); }
+        );
+
+        $("#custom-age-modal-btn").on("click", function() {
+            $("#custom-age-modal").css("opacity", "0");
+            $("#custom-age-modal > div").css("transform", "scale(0.9)");
+            setTimeout(function() {
+                window.location.href = redirectUrl;
+            }, 300);
+        });
+    }
 
     function mascara(telefone){ 
 
