@@ -21,9 +21,20 @@ function gerar_pagamento_mp($itens_ou_id, $nome_participante = null, $valor_insc
     // Obter o domínio base forçando HTTPS para produção para evitar redirecionamento (POST -> GET vazio)
     if ($is_local) {
         $back_domain = "https://efas.euripedesbarsanulfo.org.br";
+        $dir_path = "";
     } else {
         $back_domain = "https://" . $host;
+        
+        // Detectar o subdiretório baseado no SCRIPT_NAME da requisição atual
+        $script_path = $_SERVER['SCRIPT_NAME'] ?? '';
+        $dir_path = dirname($script_path);
+        $dir_path = str_replace('\\', '/', $dir_path);
+        if ($dir_path === '/' || $dir_path === '\\') {
+            $dir_path = '';
+        }
     }
+
+    $base_url = $back_domain . $dir_path;
 
     // Normalizar itens para suportar tanto array de múltiplos itens quanto parâmetros estáticos legados
     $itens_inscricao = [];
@@ -63,11 +74,11 @@ function gerar_pagamento_mp($itens_ou_id, $nome_participante = null, $valor_insc
         "items" => $items,
         "external_reference" => $external_reference,
         "back_urls" => [
-            "success" => $back_domain . "/confirma_inscricao.php?clear_cart=1&codigo_inscricao_evento=" . campo_form_codifica($last_id, true) . "&tipo=" . campo_form_codifica(2, true) . "&me=" . campo_form_codifica(0, true) . "&mm=" . campo_form_codifica("Pagamento realizado com sucesso!"),
-            "failure" => $back_domain . "/confirma_inscricao.php?codigo_inscricao_evento=" . campo_form_codifica($last_id, true) . "&tipo=" . campo_form_codifica(2, true) . "&me=" . campo_form_codifica(1, true) . "&mm=" . campo_form_codifica("Ocorreu um erro no pagamento. Tente novamente!"),
-            "pending" => $back_domain . "/confirma_inscricao.php?codigo_inscricao_evento=" . campo_form_codifica($last_id, true) . "&tipo=" . campo_form_codifica(2, true) . "&me=" . campo_form_codifica(0, true) . "&mm=" . campo_form_codifica("Pagamento pendente de aprovação.")
+            "success" => $base_url . "/confirma_inscricao.php?clear_cart=1&codigo_inscricao_evento=" . campo_form_codifica($last_id, true) . "&tipo=" . campo_form_codifica(2, true) . "&me=" . campo_form_codifica(0, true) . "&mm=" . campo_form_codifica("Pagamento realizado com sucesso!"),
+            "failure" => $base_url . "/confirma_inscricao.php?codigo_inscricao_evento=" . campo_form_codifica($last_id, true) . "&tipo=" . campo_form_codifica(2, true) . "&me=" . campo_form_codifica(1, true) . "&mm=" . campo_form_codifica("Ocorreu um erro no pagamento. Tente novamente!"),
+            "pending" => $base_url . "/confirma_inscricao.php?codigo_inscricao_evento=" . campo_form_codifica($last_id, true) . "&tipo=" . campo_form_codifica(2, true) . "&me=" . campo_form_codifica(0, true) . "&mm=" . campo_form_codifica("Pagamento pendente de aprovação.")
         ],
-        "notification_url" => $back_domain . "/retorno_mp.php",
+        "notification_url" => $base_url . "/retorno_mp.php",
         "auto_return" => "approved"
     ];
     
