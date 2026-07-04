@@ -39,4 +39,22 @@ function fix_double_utf8($str) {
     }
     return $str;
 }
+
+// Bloquear inscrições online se estiver em produção (MODO_LOCAL = false) e as inscrições online estiverem fechadas
+if (!defined('MODO_LOCAL') || !MODO_LOCAL) {
+    if (defined('INSCRICOES_ONLINE_ABERTAS') && !INSCRICOES_ONLINE_ABERTAS) {
+        $current_page = basename($_SERVER['PHP_SELF']);
+        $blocked_pages = [
+            'inscricao_adulto.php',
+            'inscricao_crianca.php',
+            'inscricao_jovem.php',
+            'inscricao_trabalhador.php',
+            'grava_inscricao.php'
+        ];
+        if (in_array($current_page, $blocked_pages)) {
+            redireciona("inscricao.php?me=" . campo_form_codifica(1, true) . "&mm=" . campo_form_codifica("As inscrições online estão encerradas. Novas inscrições somente presencial no dia do evento."));
+            exit;
+        }
+    }
+}
 ?>
