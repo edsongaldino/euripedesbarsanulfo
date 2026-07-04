@@ -116,6 +116,20 @@
 	      	
 	      </div> <!-- /row -->
 	      
+	      <div class="row">
+	      	<div class="span12">
+	      		<div class="widget">
+	      			<div class="widget-header">
+	      				<i class="icon-list-alt"></i>
+	      				<h3>Relatórios Especiais</h3>
+	      			</div> <!-- /widget-header -->
+	      			<div class="widget-content" style="padding: 20px;">
+	      				<a href="relatorio_isencoes.php?pagina=7" class="btn btn-large btn-info"><i class="icon-file-text"></i> Relatório de Isenções</a>
+	      			</div> <!-- /widget-content -->
+	      		</div> <!-- /widget -->
+	      	</div> <!-- /span12 -->
+	      </div> <!-- /row -->
+	      
 	      
 	      
 	      

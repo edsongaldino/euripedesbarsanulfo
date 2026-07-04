@@ -177,10 +177,10 @@ $query_consulta_situacao_inscricao = mysqli_query($conexao,$sql_consulta_situaca
                     <td> <?php echo converte_data_portugues($resultado_consulta_inscricoes["data_inscricao_evento"]);?> </td>
                     <td> R$ <?php echo converte_valor_real($resultado_consulta_inscricoes["valor_inscricao_evento"]);?> </td>
 
-                    <?php if($resultado_consulta_inscricoes["codigo_situacao_inscricao"] == 1){?>
-                    <td> <i class="icon-ok-sign vm"> </i> <?php echo $resultado_consulta_inscricoes["descricao_situacao_inscricao"];?></td>
-                    <?php }else{?>
+                    <?php if($resultado_consulta_inscricoes["codigo_situacao_inscricao"] == 2 || $resultado_consulta_inscricoes["codigo_situacao_inscricao"] == 4){?>
                     <td> <i class="icon-ok-sign vd"> </i> <?php echo $resultado_consulta_inscricoes["descricao_situacao_inscricao"];?></td>
+                    <?php }else{?>
+                    <td> <i class="icon-ok-sign vm"> </i> <?php echo $resultado_consulta_inscricoes["descricao_situacao_inscricao"];?></td>
                     <?php }?>
                     <td class="td-actions"><a href="imprime_cracha.php?codigo_participante=<?php echo $resultado_consulta_inscricoes["codigo_participante"];?>" target="_blank" title="Imprimir Crachá" class="btn btn-small"><i class="btn-icon-only icon-print"> </i></a><a href="editar_inscricao.php?acao=alterar&codigo_inscricao_evento=<?php echo $resultado_consulta_inscricoes["codigo_inscricao_evento"];?>" class="btn btn-small" title="Editar Inscrição"><i class="btn-icon-only icon-edit"> </i></a>
                     <?php if($_SESSION["codigo_tipo_usuario_acesso"]=='1'){?>

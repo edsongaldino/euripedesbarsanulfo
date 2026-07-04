@@ -378,8 +378,8 @@ $query_consulta_cidade5 = mysqli_query($conexao, $sql_consulta_cidade) or mascar
 <html lang="en">
 <head>
 <?php include "site_mod_head_interno.php";?>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/code.jquery.com_ui_1.10.3_themes_smoothness_jquery-ui.css">
+<script src="../js/code.jquery.com_ui_1.10.3_jquery-ui.js"></script>
 <script language="javascript" type="text/javascript">
 	
 	// instancia a pesquisa rapida

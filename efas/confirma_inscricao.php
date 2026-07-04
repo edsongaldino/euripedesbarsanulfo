@@ -128,7 +128,9 @@ foreach ($lista_inscricoes as $insc) {
 
 $link_pagamento = false;
 if ($tem_pendentes && !empty($itens_pendentes)) {
-    $link_pagamento = gerar_pagamento_mp($itens_pendentes);
+    if (!defined('MODO_LOCAL') || !MODO_LOCAL) {
+        $link_pagamento = gerar_pagamento_mp($itens_pendentes);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -224,7 +226,20 @@ if ($tem_pendentes && !empty($itens_pendentes)) {
 
 			<div class="col-md-12 pagar-inscricao margin-15" style="margin-top: 40px; text-align: center;">
 				<?php if ($tem_pendentes): ?>
-					<?php if ($link_pagamento): ?>
+					<?php if (defined('MODO_LOCAL') && MODO_LOCAL): ?>
+						<div style="background-color: #f0fdf4; padding: 30px; border-radius: 12px; border: 1.5px dashed #16a34a; display: inline-block; max-width: 650px; width: 100%; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center;">
+							<span style="font-size: 24px; color: #16a34a; display: block; margin-bottom: 12px; font-weight: bold;">
+								🎉 Inscrição Pré-Registrada!
+							</span>
+							<span style="font-size: 16px; color: #374151; display: block; margin-bottom: 15px; line-height: 1.6;">
+								Suas inscrições foram gravadas com sucesso no sistema local.<br>
+								Total a pagar: <strong style="font-size: 20px; color: #111827;">R$ <?php echo converte_valor_real($valor_total_pendente); ?></strong>
+							</span>
+							<div style="background-color: #ffffff; border: 1px solid #bbf7d0; border-radius: 8px; padding: 15px; text-align: left; color: #1f2937;">
+								<strong>Próximo passo:</strong> Dirija-se ao <strong>Caixa/Secretaria física do evento</strong> para efetuar o pagamento (via máquina de cartão ou dinheiro) e ter sua inscrição ativada.
+							</div>
+						</div>
+					<?php elseif ($link_pagamento): ?>
 						<div style="background-color: #f7f9fc; padding: 25px; border-radius: 8px; border: 1px solid #e1e8ed; display: inline-block; max-width: 600px; width: 100%; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
 							<span style="font-size: 16px; color: #555; display: block; margin-bottom: 12px;">
 								Total Pendente (<?php echo count($itens_pendentes); ?> <?php echo (count($itens_pendentes) > 1) ? 'inscrições' : 'inscrição'; ?>): 

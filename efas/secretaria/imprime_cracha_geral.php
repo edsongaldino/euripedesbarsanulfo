@@ -29,7 +29,7 @@ $sql_consulta_dados_cracha = "
 							LEFT JOIN comissao_trabalho_participante ON (participante.codigo_participante = comissao_trabalho_participante.codigo_participante)
 							LEFT JOIN comissao_trabalho ON (comissao_trabalho_participante.codigo_comissao_trabalho = comissao_trabalho.codigo_comissao_trabalho)
 							LEFT JOIN dados_complementares ON (participante.codigo_participante = dados_complementares.codigo_participante)
-							WHERE inscricao_evento.codigo_evento = '".$_SESSION["codigo_evento_acesso"]."' AND inscricao_evento.codigo_situacao_inscricao = 2 ORDER BY participante.nome_participante ASC";
+							WHERE inscricao_evento.codigo_evento = '".$_SESSION["codigo_evento_acesso"]."' AND inscricao_evento.codigo_situacao_inscricao IN (2, 4) ORDER BY participante.nome_participante ASC";
 
 else:
 // consulta inscrições de participantes vinculados ao usuário
@@ -44,7 +44,7 @@ $sql_consulta_dados_cracha = "
 							LEFT JOIN comissao_trabalho_participante ON (participante.codigo_participante = comissao_trabalho_participante.codigo_participante)
 							LEFT JOIN comissao_trabalho ON (comissao_trabalho_participante.codigo_comissao_trabalho = comissao_trabalho.codigo_comissao_trabalho)
 							LEFT JOIN dados_complementares ON (participante.codigo_participante = dados_complementares.codigo_participante)
-							WHERE inscricao_evento.codigo_evento = '".$_SESSION["codigo_evento_acesso"]."' AND inscricao_evento.codigo_situacao_inscricao = 2 ORDER BY participante.nome_participante ASC";
+							WHERE inscricao_evento.codigo_evento = '".$_SESSION["codigo_evento_acesso"]."' AND inscricao_evento.codigo_situacao_inscricao IN (2, 4) ORDER BY participante.nome_participante ASC";
 
 endif;
 

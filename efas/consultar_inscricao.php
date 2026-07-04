@@ -21,8 +21,8 @@ for ($i = 0; $i < $num; $i++) {
 <html>
 <head>
     <?php include "site_mod_head.php";?>
-    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/code.jquery.com_ui_1.10.3_themes_smoothness_jquery-ui.css">
+    <script src="js/code.jquery.com_ui_1.10.3_jquery-ui.js"></script>
     <script language="javascript" type="text/javascript">
         // instancia a pesquisa rapida
         $(document).ready(function() {
