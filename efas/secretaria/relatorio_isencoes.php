@@ -174,7 +174,7 @@ while($row = mysqli_fetch_assoc($query_consulta_isencoes)) {
                     ?>
                     <tr>
                       <td><?php echo $inscricao["codigo_inscricao_evento"];?></td>
-                      <td><?php echo utf8_decode($inscricao["nome_participante"]);?></td>
+                      <td><?php echo $inscricao["nome_participante"];?></td>
                       <td><?php echo calcula_idade($inscricao["data_nascimento_participante"]);?> anos</td>
                       <td><?php echo $tipo_nome;?></td>
                       <td><?php echo converte_data_portugues($inscricao["data_inscricao_evento"]);?></td>

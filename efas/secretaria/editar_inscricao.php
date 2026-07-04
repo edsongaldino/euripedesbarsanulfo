@@ -420,7 +420,7 @@ $query_consulta_cidade5 = mysqli_query($conexao,$sql_consulta_cidade) or mascara
 											<div class="controls">
                                                 <select id="curso_crianca[]" name="curso_crianca[]" class="span4 form-inscricao-select">
                                                   <?php while($resultado_consulta_cursos_criancas = mysqli_fetch_assoc($query_consulta_cursos_criancas)) {?>
-                                                  <option value="<?php echo $resultado_consulta_cursos_criancas["codigo_curso"];?>" <?php if($resultado_consulta_tema_especifico["codigo_curso"] == $resultado_consulta_cursos_criancas["codigo_curso"]){echo "selected";}?>><?php echo mb_convert_encoding($resultado_consulta_cursos_criancas["nome_curso"],'UTF-8','ISO-8859-1');?></option>
+                                                  <option value="<?php echo $resultado_consulta_cursos_criancas["codigo_curso"];?>" <?php if($resultado_consulta_tema_especifico["codigo_curso"] == $resultado_consulta_cursos_criancas["codigo_curso"]){echo "selected";}?>><?php echo $resultado_consulta_cursos_criancas["nome_curso"];?></option>
                                                   <?php }?>
                                                 </select>
 											</div> <!-- /controls -->				
@@ -449,7 +449,7 @@ $query_consulta_cidade5 = mysqli_query($conexao,$sql_consulta_cidade) or mascara
 												  $sql_consulta_situacao_inscricao = "SELECT codigo_situacao_inscricao, descricao_situacao_inscricao FROM situacao_inscricao";
 												  $query_consulta_situacao_inscricao = mysqli_query($conexao,$sql_consulta_situacao_inscricao) or mascara_erro_mysql($sql_consulta_situacao_inscricao);
 												  while($resultado_consulta_situacao = mysqli_fetch_assoc($query_consulta_situacao_inscricao)) {?>
-                                                  <option value="<?php echo $resultado_consulta_situacao["codigo_situacao_inscricao"];?>" <?php if($resultado_consulta_participante["codigo_situacao_inscricao"] == $resultado_consulta_situacao["codigo_situacao_inscricao"]){echo "selected";}?>><?php echo mb_convert_encoding($resultado_consulta_situacao["descricao_situacao_inscricao"],'UTF-8','ISO-8859-1');?></option>
+                                                  <option value="<?php echo $resultado_consulta_situacao["codigo_situacao_inscricao"];?>" <?php if($resultado_consulta_participante["codigo_situacao_inscricao"] == $resultado_consulta_situacao["codigo_situacao_inscricao"]){echo "selected";}?>><?php echo $resultado_consulta_situacao["descricao_situacao_inscricao"];?></option>
                                                   <?php }?>
                                                 </select>
 											</div> <!-- /controls -->				
@@ -539,7 +539,7 @@ $query_consulta_cidade5 = mysqli_query($conexao,$sql_consulta_cidade) or mascara
 											<div class="controls">
                                                 <select id="comissao_trabalho[]" name="comissao_trabalho[]" class="span6 form-inscricao-select">
                                                   <?php while($resultado_consulta_comissoes_trabalho = mysqli_fetch_assoc($query_consulta_comissoes_trabalho)) {?>
-                                                  <option value="<?php echo $resultado_consulta_comissoes_trabalho["codigo_comissao_trabalho"];?>" <?php if($resultado_consulta_participante["codigo_comissao_trabalho"] == $resultado_consulta_comissoes_trabalho["codigo_comissao_trabalho"]){echo "selected";}?>><?php echo mb_convert_encoding($resultado_consulta_comissoes_trabalho["nome_comissao_trabalho"],'UTF-8','ISO-8859-1');?></option>
+                                                  <option value="<?php echo $resultado_consulta_comissoes_trabalho["codigo_comissao_trabalho"];?>" <?php if($resultado_consulta_participante["codigo_comissao_trabalho"] == $resultado_consulta_comissoes_trabalho["codigo_comissao_trabalho"]){echo "selected";}?>><?php echo $resultado_consulta_comissoes_trabalho["nome_comissao_trabalho"];?></option>
                                                   <?php }?>
                                                 </select>
 											</div> <!-- /controls -->				
@@ -566,7 +566,7 @@ $query_consulta_cidade5 = mysqli_query($conexao,$sql_consulta_cidade) or mascara
 												  $sql_consulta_situacao_inscricao = "SELECT codigo_situacao_inscricao, descricao_situacao_inscricao FROM situacao_inscricao";
 												  $query_consulta_situacao_inscricao = mysqli_query($conexao,$sql_consulta_situacao_inscricao) or mascara_erro_mysql($sql_consulta_situacao_inscricao);
 												  while($resultado_consulta_situacao = mysqli_fetch_assoc($query_consulta_situacao_inscricao)) {?>
-                                                  <option value="<?php echo $resultado_consulta_situacao["codigo_situacao_inscricao"];?>" <?php if($resultado_consulta_participante["codigo_situacao_inscricao"] == $resultado_consulta_situacao["codigo_situacao_inscricao"]){echo "selected";}?>><?php echo mb_convert_encoding($resultado_consulta_situacao["descricao_situacao_inscricao"],'UTF-8','ISO-8859-1');?></option>
+                                                  <option value="<?php echo $resultado_consulta_situacao["codigo_situacao_inscricao"];?>" <?php if($resultado_consulta_participante["codigo_situacao_inscricao"] == $resultado_consulta_situacao["codigo_situacao_inscricao"]){echo "selected";}?>><?php echo $resultado_consulta_situacao["descricao_situacao_inscricao"];?></option>
                                                   <?php }?>
                                                 </select>
 											</div> <!-- /controls -->				
@@ -652,7 +652,7 @@ $query_consulta_cidade5 = mysqli_query($conexao,$sql_consulta_cidade) or mascara
 											<div class="controls">
                                                 <select id="curso_participante[]" name="curso_participante[]" class="span6 form-inscricao-select">
                                                   <?php while($resultado_consulta_tema_atual_adulto = mysqli_fetch_assoc($query_consulta_tema_atual_adulto)) {?>
-                                                  <option value="<?php echo $resultado_consulta_tema_atual_adulto["codigo_curso"];?>" <?php if($resultado_consulta_tema_atual["codigo_curso"] == $resultado_consulta_tema_atual_adulto["codigo_curso"]){echo "selected";}?>><?php echo mb_convert_encoding($resultado_consulta_tema_atual_adulto["descricao_tema_curso"],'UTF-8','ISO-8859-1');?> - <strong><?php echo mb_convert_encoding($resultado_consulta_tema_atual_adulto["nome_curso"],'UTF-8','ISO-8859-1');?></strong></option>
+                                                  <option value="<?php echo $resultado_consulta_tema_atual_adulto["codigo_curso"];?>" <?php if($resultado_consulta_tema_atual["codigo_curso"] == $resultado_consulta_tema_atual_adulto["codigo_curso"]){echo "selected";}?>><?php echo $resultado_consulta_tema_atual_adulto["descricao_tema_curso"];?> - <strong><?php echo $resultado_consulta_tema_atual_adulto["nome_curso"];?></strong></option>
                                                   <?php }?>
                                                 </select>
 											</div> <!-- /controls -->				
@@ -663,7 +663,7 @@ $query_consulta_cidade5 = mysqli_query($conexao,$sql_consulta_cidade) or mascara
 											<div class="controls">
                                                 <select id="curso_participante[]" name="curso_participante[]" class="span6 form-inscricao-select">
                                                   <?php while($resultado_consulta_tema_especifico_adulto = mysqli_fetch_assoc($query_consulta_tema_especifico_adulto)) {?>
-                                                  <option value="<?php echo $resultado_consulta_tema_especifico_adulto["codigo_curso"];?>" <?php if($resultado_consulta_tema_especifico["codigo_curso"] == $resultado_consulta_tema_especifico_adulto["codigo_curso"]){echo "selected";}?>><?php echo mb_convert_encoding($resultado_consulta_tema_especifico_adulto["descricao_tema_curso"],'UTF-8','ISO-8859-1');?> - <strong><?php echo mb_convert_encoding($resultado_consulta_tema_especifico_adulto["nome_curso"],'UTF-8','ISO-8859-1');?></strong></option>
+                                                  <option value="<?php echo $resultado_consulta_tema_especifico_adulto["codigo_curso"];?>" <?php if($resultado_consulta_tema_especifico["codigo_curso"] == $resultado_consulta_tema_especifico_adulto["codigo_curso"]){echo "selected";}?>><?php echo $resultado_consulta_tema_especifico_adulto["descricao_tema_curso"];?> - <strong><?php echo $resultado_consulta_tema_especifico_adulto["nome_curso"];?></strong></option>
                                                   <?php }?>
                                                 </select>
 											</div> <!-- /controls -->				
@@ -690,7 +690,7 @@ $query_consulta_cidade5 = mysqli_query($conexao,$sql_consulta_cidade) or mascara
 												  $sql_consulta_situacao_inscricao = "SELECT codigo_situacao_inscricao, descricao_situacao_inscricao FROM situacao_inscricao";
 												  $query_consulta_situacao_inscricao = mysqli_query($conexao,$sql_consulta_situacao_inscricao) or mascara_erro_mysql($sql_consulta_situacao_inscricao);
 												  while($resultado_consulta_situacao = mysqli_fetch_assoc($query_consulta_situacao_inscricao)) {?>
-                                                  <option value="<?php echo $resultado_consulta_situacao["codigo_situacao_inscricao"];?>" <?php if($resultado_consulta_participante["codigo_situacao_inscricao"] == $resultado_consulta_situacao["codigo_situacao_inscricao"]){echo "selected";}?>><?php echo mb_convert_encoding($resultado_consulta_situacao["descricao_situacao_inscricao"],'UTF-8','ISO-8859-1');?></option>
+                                                  <option value="<?php echo $resultado_consulta_situacao["codigo_situacao_inscricao"];?>" <?php if($resultado_consulta_participante["codigo_situacao_inscricao"] == $resultado_consulta_situacao["codigo_situacao_inscricao"]){echo "selected";}?>><?php echo $resultado_consulta_situacao["descricao_situacao_inscricao"];?></option>
                                                   <?php }?>
                                                 </select>
 											</div> <!-- /controls -->				

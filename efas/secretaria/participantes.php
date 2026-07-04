@@ -171,7 +171,7 @@ $query_consulta_situacao_inscricao = mysqli_query($conexao,$sql_consulta_situaca
                     <?php }?>
 
                     <td> <?php echo $resultado_consulta_inscricoes["codigo_inscricao_evento"];?></td>
-                    <td> <?php echo utf8_decode($resultado_consulta_inscricoes["nome_participante"]);?></td>
+                    <td> <?php echo $resultado_consulta_inscricoes["nome_participante"];?></td>
                     <td> <?php echo calcula_idade($resultado_consulta_inscricoes["data_nascimento_participante"]);?></td>
                     <td> <?php echo $resultado_consulta_inscricoes["nome_evento"];?></td>
                     <td> <?php echo converte_data_portugues($resultado_consulta_inscricoes["data_inscricao_evento"]);?> </td>

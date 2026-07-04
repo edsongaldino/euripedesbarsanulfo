@@ -1,4 +1,5 @@
 <?php include("sistema_mod_include.php"); ?>
+<meta charset="utf-8">
 <style>
 .ficha_inscricao{width:19cm; height:12cm; float:left; margin:-25px 0 0 -25px;}
 .ficha_inscricao .nome_participante{position:absolute; top:240px; left:310px; font-size:18px; line-height:20px; text-transform:uppercase; text-align:center;  font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;}
@@ -45,10 +46,10 @@ $query_consulta_curso = mysqli_query($conexao, $sql_consulta_curso) or mascara_e
 
 	
 
-	echo '<div class="nome_participante">'.utf8_decode($resultado_consulta_ficha_inscricao["nome_participante"]).'</div>';
-	echo '<div class="codigo_participante">'.utf8_decode($resultado_consulta_ficha_inscricao["codigo_participante"]).'</div>';
+	echo '<div class="nome_participante">'.$resultado_consulta_ficha_inscricao["nome_participante"].'</div>';
+	echo '<div class="codigo_participante">'.$resultado_consulta_ficha_inscricao["codigo_participante"].'</div>';
 	
-	echo '<div class="nome_participante_comprovante">'.utf8_decode($resultado_consulta_ficha_inscricao["nome_participante"]).'</div>';
+	echo '<div class="nome_participante_comprovante">'.$resultado_consulta_ficha_inscricao["nome_participante"].'</div>';
 
 
 

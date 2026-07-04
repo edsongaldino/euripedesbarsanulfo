@@ -216,7 +216,7 @@ for ($i = 0; $i < $num; $i++) {
                         <div class="clearfix"> </div>
                     </div>
                     <input type="hidden" id="acao" name="acao" value="<?php echo campo_form_codifica("gravar_participante_trabalhador"); ?>">
-                   <input type="submit" value="FINALIZAR INSCRIÇÃO">
+                   <!--<input type="submit" value="FINALIZAR INSCRIÇÃO">-->
                 </form>
             </div>
             </div>

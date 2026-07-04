@@ -2,7 +2,7 @@
 <?php
 	conecta_mysql();
 	// dados
-	$pesquisa_rapida = trim(utf8_decode($_GET['term']));
+	$pesquisa_rapida = trim($_GET['term']);
 	$pesquisa_rapida = str_replace("\'"," ",$pesquisa_rapida);
 	$pesquisa_rapida = strtolower(strtr($pesquisa_rapida, "áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ", "aaaaeeiooouucAAAAEEIOOOUUC"));
 	$pesquisa_rapida = mysqli_real_escape_string($conexao, trim($pesquisa_rapida));
