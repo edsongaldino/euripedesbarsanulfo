@@ -1,10 +1,37 @@
 <?php
-include "configuracoes.php";
+session_start();
+require_once("db.php");
 
 $status = $_GET['status'] ?? '';
 $ref = $_GET['ref'] ?? '';
 $msg_alerta = '';
 $alert_class = '';
+
+// Processa login
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['acao_login'] ?? '') === 'entrar') {
+    $email = protege_campo($_POST['email_usuario'] ?? '');
+    $senha = md5(protege_campo($_POST['senha_usuario'] ?? ''));
+    
+    $conexao = conecta_mysql();
+    if ($conexao) {
+        $sql = "SELECT usuario.codigo_usuario, usuario.email_usuario, participante.nome_participante 
+                FROM usuario 
+                JOIN participante ON usuario.codigo_participante = participante.codigo_participante 
+                WHERE usuario.email_usuario = '$email' AND usuario.senha_usuario = '$senha' LIMIT 1";
+        $result = mysqli_query($conexao, $sql);
+        if ($result && mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $_SESSION["key_acesso"] = md5(KEY_SESSAO);
+            $_SESSION["email_usuario_acesso"] = $row["email_usuario"];
+            $_SESSION["nome_usuario_acesso"] = $row["nome_participante"];
+            header("Location: admin.php");
+            exit;
+        } else {
+            $msg_alerta = "E-mail ou senha incorretos. Tente novamente.";
+            $alert_class = "alert-danger";
+        }
+    }
+}
 
 if ($status === 'success') {
     $msg_alerta = "Sua reserva foi concluída com sucesso! O pagamento está sendo processado.";
@@ -30,9 +57,10 @@ if ($status === 'success') {
     <!-- CSS Styles -->
     <style>
         :root {
-            --primary: #7209b7;
-            --primary-light: #f72585;
-            --primary-glow: rgba(114, 9, 183, 0.15);
+            --primary: #1b365d;
+            --primary-hover: #3a86c8;
+            --primary-glow: rgba(27, 54, 93, 0.15);
+            --accent: #79b496;
             --bg-body: #f8f9fa;
             --bg-card: #ffffff;
             --border-color: #e9ecef;
@@ -76,13 +104,12 @@ if ($status === 'success') {
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            color: var(--primary);
+        .logo-img {
+            height: 48px;
+            width: auto;
         }
 
         .logo-title {
@@ -110,7 +137,7 @@ if ($status === 'success') {
             align-items: center;
             gap: 6px;
             font-size: 0.85rem;
-            color: var(--primary);
+            color: var(--primary-hover);
             font-weight: 500;
         }
 
@@ -128,7 +155,9 @@ if ($status === 'success') {
         }
 
         .btn-entrar:hover {
-            background: rgba(114, 9, 183, 0.05);
+            background: rgba(27, 54, 93, 0.05);
+            border-color: var(--primary-hover);
+            color: var(--primary-hover);
         }
 
         /* Steps Progress Bar */
@@ -162,7 +191,7 @@ if ($status === 'success') {
             position: absolute;
             top: 15px;
             left: 5%;
-            width: 0%; /* Dynamic from JS */
+            width: 0%; 
             height: 2px;
             background: var(--primary);
             z-index: 0;
@@ -238,6 +267,7 @@ if ($status === 'success') {
             display: flex;
             align-items: center;
             gap: 8px;
+            color: var(--primary);
         }
 
         .card-title svg {
@@ -274,7 +304,7 @@ if ($status === 'success') {
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(114, 9, 183, 0.1);
+            box-shadow: 0 0 0 3px var(--primary-glow);
         }
 
         .checkbox-group {
@@ -313,7 +343,7 @@ if ($status === 'success') {
         }
 
         .btn-action:hover {
-            background: #5c0796;
+            background: var(--primary-hover);
             transform: translateY(-1px);
         }
 
@@ -362,7 +392,9 @@ if ($status === 'success') {
         }
 
         .btn-outline:hover {
-            background: rgba(114, 9, 183, 0.05);
+            background: rgba(27, 54, 93, 0.05);
+            border-color: var(--primary-hover);
+            color: var(--primary-hover);
         }
 
         .btn-outline:disabled {
@@ -380,7 +412,7 @@ if ($status === 'success') {
         }
 
         .about-card a {
-            color: var(--primary);
+            color: var(--primary-hover);
             text-decoration: none;
             font-weight: 600;
             display: inline-block;
@@ -396,8 +428,8 @@ if ($status === 'success') {
 
         /* Alert Callout */
         .callout-alert {
-            background: #f3e8ff;
-            border: 1px solid rgba(114, 9, 183, 0.1);
+            background: rgba(27, 54, 93, 0.05);
+            border: 1px solid rgba(27, 54, 93, 0.1);
             color: var(--primary);
             padding: 16px 20px;
             border-radius: 12px;
@@ -665,7 +697,7 @@ if ($status === 'success') {
         }
 
         .btn-view-summary:hover {
-            background: #5c0796;
+            background: var(--primary-hover);
         }
 
         /* Mobile Scroll Prompt */
@@ -673,7 +705,7 @@ if ($status === 'success') {
             display: none;
             text-align: center;
             font-size: 0.8rem;
-            color: var(--primary);
+            color: var(--primary-hover);
             margin-bottom: 8px;
             font-weight: 500;
             animation: pulseScroll 1.5s infinite alternate;
@@ -714,7 +746,7 @@ if ($status === 'success') {
         }
 
         .footer-link:hover {
-            color: var(--primary);
+            color: var(--primary-hover);
         }
 
         /* Payment Form Panel */
@@ -751,8 +783,54 @@ if ($status === 'success') {
 
         .payment-radio:checked + .payment-box {
             border-color: var(--primary);
-            background: rgba(114, 9, 183, 0.05);
+            background: rgba(27, 54, 93, 0.05);
             color: var(--primary);
+        }
+
+        /* Login Modal Stylings */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            position: relative;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
         }
 
         /* Responsividade */
@@ -776,7 +854,7 @@ if ($status === 'success') {
                 padding: 15px 20px;
             }
             .steps-container {
-                display: none; /* Hide steps bar on small mobiles to save space */
+                display: none; 
             }
             footer {
                 flex-direction: column;
@@ -795,9 +873,7 @@ if ($status === 'success') {
     <!-- Header / Navbar -->
     <nav>
         <div class="logo-area">
-            <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="currentColor"/>
-            </svg>
+            <img src="logo.png" alt="Sociedade Espírita Eurípedes Barsanulfo" class="logo-img">
             <div class="logo-title">
                 Mesa do Bem
                 <span>Evento Beneficente</span>
@@ -808,7 +884,7 @@ if ($status === 'success') {
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 Ambiente seguro
             </div>
-            <button class="btn-entrar">Entrar</button>
+            <button class="btn-entrar" id="btnShowLogin">Entrar</button>
         </div>
     </nav>
 
@@ -1005,6 +1081,27 @@ if ($status === 'success') {
 
     </div>
 
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-card">
+            <button class="modal-close" id="btnCloseLogin">&times;</button>
+            <div class="modal-title">Faça seu login</div>
+            
+            <form action="index.php" method="POST">
+                <input type="hidden" name="acao_login" value="entrar">
+                <div class="form-group">
+                    <label for="email_usuario">E-mail</label>
+                    <input type="email" id="email_usuario" name="email_usuario" class="form-control" required placeholder="seu@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="senha_usuario">Senha</label>
+                    <input type="password" id="senha_usuario" name="senha_usuario" class="form-control" required placeholder="Sua senha">
+                </div>
+                <button type="submit" class="btn-action" style="margin-top: 10px;">Entrar</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="footer-contacts">
@@ -1048,6 +1145,18 @@ if ($status === 'success') {
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
         });
 
+        // Login Modal Controls
+        const modal = document.getElementById('loginModal');
+        document.getElementById('btnShowLogin').addEventListener('click', () => {
+            modal.style.display = 'flex';
+        });
+        document.getElementById('btnCloseLogin').addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.style.display = 'none';
+        });
+
         // Set Step Flow
         function setStep(step) {
             currentStep = step;
@@ -1062,10 +1171,12 @@ if ($status === 'success') {
             // Indicators styling
             for (let i = 1; i <= 4; i++) {
                 const indicator = document.getElementById('stepIndicator' + i);
-                if (i <= step) {
-                    indicator.classList.add('active');
-                } else {
-                    indicator.classList.remove('active');
+                if (indicator) {
+                    if (i <= step) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
                 }
             }
 
