@@ -848,6 +848,13 @@ if ($status === 'success') {
         @media (max-width: 1024px) {
             .container {
                 grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 15px 30px 15px;
+            }
+            .sidebar-col {
+                max-width: 500px;
+                width: 100%;
+                margin: 0 auto;
             }
             .steps-container {
                 margin: 20px auto;
@@ -862,11 +869,92 @@ if ($status === 'success') {
 
         @media (max-width: 768px) {
             nav {
-                padding: 15px 20px;
+                padding: 12px 15px;
+            }
+            .logo-img {
+                height: 38px;
+            }
+            .logo-title {
+                font-size: 1.05rem;
+            }
+            .logo-title span {
+                display: none;
             }
             .steps-container {
                 display: none; 
             }
+            .card {
+                padding: 20px;
+                border-radius: 12px;
+            }
+            .card-title {
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+            .form-control {
+                padding: 10px 14px;
+                font-size: 0.85rem;
+            }
+            .form-group label {
+                font-size: 0.75rem;
+                margin-bottom: 4px;
+            }
+            .btn-action {
+                padding: 12px;
+                font-size: 0.9rem;
+                margin-top: 15px;
+            }
+            .checkbox-group {
+                font-size: 0.8rem;
+                margin-top: 12px;
+            }
+            .map-card {
+                padding: 20px 15px;
+                border-radius: 12px;
+            }
+            .legend-bar {
+                gap: 15px;
+                font-size: 0.8rem;
+            }
+            .legend-dot {
+                width: 16px;
+                height: 16px;
+            }
+
+            /* Salon Grid mobile resizing */
+            .salon-grid {
+                grid-template-columns: repeat(16, 44px);
+                grid-template-rows: repeat(7, 44px);
+                gap: 8px;
+                padding: 15px;
+            }
+            .round-table {
+                width: 44px;
+                height: 44px;
+            }
+            .table-top {
+                width: 28px;
+                height: 28px;
+                font-size: 0.75rem;
+                border-width: 1.5px;
+            }
+            .chair {
+                width: 10px;
+                height: 10px;
+                border-width: 1px;
+            }
+            .chair-top { top: 0px; left: 17px; }
+            .chair-bottom { bottom: 0px; left: 17px; }
+            .chair-left { left: 0px; top: 17px; }
+            .chair-right { right: 0px; top: 17px; }
+
+            .palco-central {
+                font-size: 0.6rem;
+            }
+            .palco-central strong {
+                font-size: 0.7rem;
+            }
+
             footer {
                 flex-direction: column;
                 align-items: center;
@@ -875,6 +963,56 @@ if ($status === 'success') {
             }
             .footer-contacts {
                 justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 10px 12px;
+            }
+            .logo-area {
+                gap: 8px;
+            }
+            .logo-img {
+                height: 32px;
+            }
+            .logo-title {
+                font-size: 0.95rem;
+            }
+            .nav-actions {
+                gap: 10px;
+            }
+            .secure-text {
+                display: none;
+            }
+            .secure-badge {
+                gap: 0;
+            }
+            .btn-entrar {
+                padding: 6px 14px;
+                font-size: 0.8rem;
+            }
+            .card {
+                padding: 16px;
+            }
+            .form-control {
+                padding: 9px 12px;
+            }
+            .map-action-bar {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+                text-align: center;
+            }
+            .map-action-title {
+                justify-content: center;
+            }
+            .map-actions-buttons {
+                flex-direction: column;
+            }
+            .btn-clear, .btn-view-summary {
+                width: 100%;
+                padding: 12px;
             }
         }
     </style>
@@ -893,7 +1031,7 @@ if ($status === 'success') {
         <div class="nav-actions">
             <div class="secure-badge">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                Ambiente seguro
+                <span class="secure-text">Ambiente seguro</span>
             </div>
             <button class="btn-entrar" id="btnShowLogin">Entrar</button>
         </div>
