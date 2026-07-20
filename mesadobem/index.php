@@ -97,6 +97,8 @@ if ($status === 'success') {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         /* Top Navbar */
@@ -254,6 +256,7 @@ if ($status === 'success') {
             grid-template-columns: 340px 1fr;
             gap: 30px;
             flex: 1;
+            min-width: 0;
         }
 
         /* Column Left (Sidebar Cards) */
@@ -261,6 +264,7 @@ if ($status === 'success') {
             display: flex;
             flex-direction: column;
             gap: 20px;
+            min-width: 0;
         }
 
         .card {
@@ -435,6 +439,7 @@ if ($status === 'success') {
             display: flex;
             flex-direction: column;
             gap: 20px;
+            min-width: 0;
         }
 
         /* Alert Callout */
