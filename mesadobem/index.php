@@ -10,7 +10,18 @@ $alert_class = '';
 // Processa login
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['acao_login'] ?? '') === 'entrar') {
     $email = protege_campo($_POST['email_usuario'] ?? '');
-    $senha = md5(protege_campo($_POST['senha_usuario'] ?? ''));
+    $senha_bruta = $_POST['senha_usuario'] ?? '';
+    
+    // Usuário padrão
+    if ($email === 'secretaria' && $senha_bruta === 'festajunina26@') {
+        $_SESSION["key_acesso"] = md5(KEY_SESSAO);
+        $_SESSION["email_usuario_acesso"] = 'secretaria';
+        $_SESSION["nome_usuario_acesso"] = 'Secretaria';
+        header("Location: admin.php");
+        exit;
+    }
+    
+    $senha = md5(protege_campo($senha_bruta));
     
     $conexao = conecta_mysql();
     if ($conexao) {
@@ -49,7 +60,7 @@ if ($status === 'success') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesa do Bem - Reservas de Mesas</title>
+    <title>Festa Junina 2026 - Reservas de Mesas</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -875,8 +886,8 @@ if ($status === 'success') {
         <div class="logo-area">
             <img src="logo.png" alt="Sociedade Espírita Eurípedes Barsanulfo" class="logo-img">
             <div class="logo-title">
-                Mesa do Bem
-                <span>Evento Beneficente</span>
+                Festa Junina 2026
+                <span>Educandário Espírita Maria de Nazaré</span>
             </div>
         </div>
         <div class="nav-actions">
@@ -1105,21 +1116,21 @@ if ($status === 'success') {
     <!-- Footer -->
     <footer>
         <div class="footer-contacts">
-            <a href="tel:1140028922" class="footer-link">
+            <a href="tel:65996038552" class="footer-link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                (11) 4002-8922
+                (65) 99603-8552
             </a>
-            <a href="mailto:contato@mesadobem.org.br" class="footer-link">
+            <a href="mailto:educandario@euripedesbarsanulfo.org.br" class="footer-link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                contato@mesadobem.org.br
+                educandario@euripedesbarsanulfo.org.br
             </a>
-            <a href="https://instagram.com/mesadobem.evento" target="_blank" class="footer-link">
+            <a href="https://instagram.com/euripedesbarsanulfovg" target="_blank" class="footer-link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                @mesadobem.evento
+                @euripedesbarsanulfovg
             </a>
         </div>
         <div>
-            &copy; 2024 Mesa do Bem - Evento Beneficente. Todos os direitos reservados.
+            &copy; 2026 Festa Junina - Educandário Espírita Maria de Nazaré. Todos os direitos reservados.
         </div>
     </footer>
 
