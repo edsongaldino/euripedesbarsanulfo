@@ -96,9 +96,46 @@ if (isset($payment['status']) && $payment['status'] === 'approved' && isset($pay
     $ids = [];
     
     // Parseia os IDs do external_reference
-    if (strpos($ext_ref, 'EFAS-MULTI-') === 0) {
+    if (strpos($ext_ref, 'EFAS-MESAS-') === 0) {
+        $ids_str = substr($ext_ref, strlen('EFAS-MESAS-'));
+        $ids = array_map('intval', explode('-', $ids_str));
+        
+        if (!empty($ids)) {
+            $ids_str_sql = implode(',', $ids);
+            if ($conexao) {
+                $sql_update = "UPDATE reserva_mesa SET codigo_situacao = 2 WHERE codigo_reserva IN ($ids_str_sql)";
+                $query_update = mysqli_query($conexao, $sql_update);
+                if ($query_update) {
+                    log_msg("SUCCESS: Updated status to 2 for table reservations: $ids_str_sql");
+                } else {
+                    log_msg("ERROR: Database update failed for table reservations: $ids_str_sql | Error: " . mysqli_error($conexao));
+                }
+            } else {
+                log_msg("ERROR: Database connection was not established. Cannot update table reservations: $ids_str_sql");
+            }
+        }
+    } elseif (strpos($ext_ref, 'EFAS-MULTI-') === 0) {
         $ids_str = substr($ext_ref, strlen('EFAS-MULTI-'));
         $ids = array_map('intval', explode('-', $ids_str));
+        
+        if (!empty($ids)) {
+            // Atualiza a situação das inscrições no banco de dados para 2 (Pago)
+            $ids_escaped = array_map('intval', $ids);
+            $ids_str = implode(',', $ids_escaped);
+            
+            if ($conexao) {
+                $sql_update = "UPDATE inscricao_evento SET codigo_situacao_inscricao = 2 WHERE codigo_inscricao_evento IN ($ids_str)";
+                $query_update = mysqli_query($conexao, $sql_update);
+                
+                if ($query_update) {
+                    log_msg("SUCCESS: Updated status to 2 for IDs: $ids_str");
+                } else {
+                    log_msg("ERROR: Database update failed for IDs: $ids_str | Error: " . mysqli_error($conexao));
+                }
+            } else {
+                log_msg("ERROR: Database connection was not established. Cannot update IDs: $ids_str");
+            }
+        }
     } else {
         // Fallback antigo ou id unico
         if (preg_match('/EFAS-(\d+)/', $ext_ref, $matches)) {
@@ -109,27 +146,27 @@ if (isset($payment['status']) && $payment['status'] === 'approved' && isset($pay
                 $ids = array_map('intval', $matches[0]);
             }
         }
-    }
-    
-    if (!empty($ids)) {
-        // Atualiza a situação das inscrições no banco de dados para 2 (Pago)
-        $ids_escaped = array_map('intval', $ids);
-        $ids_str = implode(',', $ids_escaped);
         
-        if ($conexao) {
-            $sql_update = "UPDATE inscricao_evento SET codigo_situacao_inscricao = 2 WHERE codigo_inscricao_evento IN ($ids_str)";
-            $query_update = mysqli_query($conexao, $sql_update);
+        if (!empty($ids)) {
+            // Atualiza a situação das inscrições no banco de dados para 2 (Pago)
+            $ids_escaped = array_map('intval', $ids);
+            $ids_str = implode(',', $ids_escaped);
             
-            if ($query_update) {
-                log_msg("SUCCESS: Updated status to 2 for IDs: $ids_str");
+            if ($conexao) {
+                $sql_update = "UPDATE inscricao_evento SET codigo_situacao_inscricao = 2 WHERE codigo_inscricao_evento IN ($ids_str)";
+                $query_update = mysqli_query($conexao, $sql_update);
+                
+                if ($query_update) {
+                    log_msg("SUCCESS: Updated status to 2 for IDs: $ids_str");
+                } else {
+                    log_msg("ERROR: Database update failed for IDs: $ids_str | Error: " . mysqli_error($conexao));
+                }
             } else {
-                log_msg("ERROR: Database update failed for IDs: $ids_str | Error: " . mysqli_error($conexao));
+                log_msg("ERROR: Database connection was not established. Cannot update IDs: $ids_str");
             }
         } else {
-            log_msg("ERROR: Database connection was not established. Cannot update IDs: $ids_str");
+            log_msg("WARNING: No valid IDs parsed from external_reference: $ext_ref");
         }
-    } else {
-        log_msg("WARNING: No valid IDs parsed from external_reference: $ext_ref");
     }
 }
 
