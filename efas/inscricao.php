@@ -22,10 +22,6 @@ if (!defined('MODO_LOCAL') || !MODO_LOCAL) {
 				<?php include "site_mod_topo.php";?>
 			</div>
 
-			<div class="banner-main">
-                <?php include "site_mod_banner.php";?>
-	        </div>
-
 			</div>
 </div>
 <!--//header-->

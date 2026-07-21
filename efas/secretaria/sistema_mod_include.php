@@ -1,5 +1,6 @@
 <?php
 session_start();
+ini_set('display_errors', 0);
 
 require_once("ferramenta/configuracoes.php");
 require_once("ferramenta/funcao_php.php");
@@ -19,8 +20,6 @@ if (isset($_GET['evento'])) {
         }
     }
 }
-
-ini_set('display_errors', 0);
 
 function fix_double_utf8($str) {
     if ($str === null || $str === '') {

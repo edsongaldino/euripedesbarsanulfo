@@ -85,10 +85,7 @@ for ($i = 0; $i < $num; $i++) {
 			<div class="header-top">
 				<?php include "site_mod_topo.php";?>
 			</div>
-			<div class="banner-main">
-                <?php include "site_mod_banner.php";?>
-	        </div>
-            </div>
+    </div>
 </div>
 <!--//header-->
 <!--content-->
@@ -216,7 +213,7 @@ for ($i = 0; $i < $num; $i++) {
                         <div class="clearfix"> </div>
                     </div>
                     <input type="hidden" id="acao" name="acao" value="<?php echo campo_form_codifica("gravar_participante_trabalhador"); ?>">
-                   <!--<input type="submit" value="FINALIZAR INSCRIÇÃO">-->
+                   <input type="submit" value="FINALIZAR INSCRIÇÃO">
                 </form>
             </div>
             </div>

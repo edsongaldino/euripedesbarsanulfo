@@ -146,9 +146,6 @@ if ($tem_pendentes && !empty($itens_pendentes)) {
 			<div class="header-top">
 				<?php include "site_mod_topo.php";?>
 			</div>
-			<div class="banner-main">
-                <?php include "site_mod_banner.php";?>
-	        </div>
 </div>
 <!--//header-->
 <!--content-->

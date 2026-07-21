@@ -82,9 +82,6 @@ if(isset($_GET['acao'])){
 			<div class="header-top">
 				<?php include "site_mod_topo.php";?>
 			</div>
-			<div class="banner-main">
-                <?php include "site_mod_banner.php";?>
-	        </div>
 </div>
 <!--//header-->
 <!--content-->
