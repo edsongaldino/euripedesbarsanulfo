@@ -319,23 +319,8 @@
         </div>
 
         <h1>Sociedade Espírita<br>Eurípedes Barsanulfo</h1>
-        <p class="subtitle">Seja bem-vindo(a) à nossa casa. Escolha uma das opções abaixo para acessar nossos canais digitais.</p>
-
-        <div class="button-group">            
-            <a href="efas/reserva_mesas.php" class="btn btn-primary" id="btn-reserva-mesas">
-                Reservar Mesas do Evento
-                <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
-                </svg>
-            </a>
-            
-            <a href="institucional/" class="btn btn-secondary" id="btn-institucional">
-                Conhecer a Sociedade Espírita
-                <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
-                </svg>
-            </a>
-        </div>
+        <p class="subtitle" style="font-size: 1.2rem; font-weight: 500; margin-bottom: 10px; color: var(--secondary);">Site em construção</p>
+        <p class="subtitle">Estamos preparando um novo espaço para você.</p>
 
         <p class="footer-text">&copy; <?php echo date("Y"); ?> Sociedade Espírita Eurípedes Barsanulfo. Todos os direitos reservados.</p>
     </main>

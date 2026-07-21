@@ -574,7 +574,7 @@ if ($status === 'success') {
         /* Palco Central Overlay */
         .palco-central {
             grid-column: 7 / span 4;
-            grid-row: 3 / span 3;
+            grid-row: 1 / span 3;
             background: #fdfaf6;
             border: 2px dashed #e2b45c;
             border-radius: 8px;
@@ -1450,8 +1450,8 @@ if ($status === 'success') {
             for (let row = 1; row <= 7; row++) {
                 for (let col = 1; col <= 16; col++) {
                     // Palco Central Space
-                    if (row >= 3 && row <= 5 && col >= 7 && col <= 10) {
-                        if (row === 3 && col === 7) {
+                    if (row >= 1 && row <= 3 && col >= 7 && col <= 10) {
+                        if (row === 1 && col === 7) {
                             const palco = document.createElement('div');
                             palco.className = 'palco-central';
                             palco.innerHTML = '<strong>PALCO CENTRAL</strong><span>10,00 m²<br>(3,16m x 3,16m)</span>';

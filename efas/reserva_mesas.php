@@ -181,7 +181,7 @@ if ($status === 'success') {
         /* Paço Central Overlay */
         .paco-central {
             grid-column: 7 / span 4;
-            grid-row: 3 / span 3;
+            grid-row: 1 / span 3;
             background: rgba(255, 255, 255, 0.05);
             border: 2px dashed rgba(255, 255, 255, 0.15);
             border-radius: 8px;
@@ -737,26 +737,35 @@ if ($status === 'success') {
             const grid = document.getElementById('salonGrid');
             grid.innerHTML = '';
 
-            let mesaContador = 1;
+            // Mapa de mesas para manter a numeração original com o palco movido
+            const mapMesas = [
+                [ 1,  2,  3,  4,  5,  6,   0,  0,  0,  0,  11, 12, 13, 14, 15, 16],
+                [17, 18, 19, 20, 21, 22,   0,  0,  0,  0,  27, 28, 29, 30, 31, 32],
+                [33, 34, 35, 36, 37, 38,   0,  0,  0,  0,  39, 40, 41, 42, 43, 44],
+                [45, 46, 47, 48, 49, 50,   7,  8,  9, 10,  51, 52, 53, 54, 55, 56],
+                [57, 58, 59, 60, 61, 62,  23, 24, 25, 26,  63, 64, 65, 66, 67, 68],
+                [69, 70, 71, 72, 73, 74,  75, 76, 77, 78,  79, 80, 81, 82, 83, 84],
+                [85, 86, 87, 88, 89, 90,  91, 92, 93, 94,  95, 96, 97, 98, 99, 100]
+            ];
 
             // Loop para as 7 linhas e 16 colunas
             for (let row = 1; row <= 7; row++) {
                 for (let col = 1; col <= 16; col++) {
-                    // Verifica se a célula atual está dentro do Paço Central
-                    // Paço Central: linhas 3, 4, 5 e colunas 7, 8, 9, 10
-                    if (row >= 3 && row <= 5 && col >= 7 && col <= 10) {
+                    // Verifica se a célula atual está dentro do Palco Central
+                    // Palco Central: linhas 1, 2, 3 e colunas 7, 8, 9, 10
+                    if (row >= 1 && row <= 3 && col >= 7 && col <= 10) {
                         // Renderiza o bloco central apenas uma vez na célula inicial dele
-                        if (row === 3 && col === 7) {
+                        if (row === 1 && col === 7) {
                             const paco = document.createElement('div');
                             paco.className = 'paco-central';
-                            paco.innerHTML = '<strong>PAÇO CENTRAL</strong><span>10,00 m²<br>(3,16m x 3,16m)</span>';
+                            paco.innerHTML = '<strong>PALCO CENTRAL</strong><span>10,00 m²<br>(3,16m x 3,16m)</span>';
                             grid.appendChild(paco);
                         }
                         continue;
                     }
 
-                    // Se não for Paço Central, é uma mesa
-                    const mesaNum = mesaContador++;
+                    // Se não for Palco Central, é uma mesa
+                    const mesaNum = mapMesas[row - 1][col - 1];
                     const mesaObj = mesasReservadas.find(m => m.numero === mesaNum);
                     
                     const mesaElement = document.createElement('div');
