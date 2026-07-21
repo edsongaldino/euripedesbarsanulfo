@@ -2,3 +2,7 @@ RewriteEngine On
 
 # Redireciona o link do QR Code para o portal de inscrição do evento ativo (ID 12)
 RewriteRule ^inscricao-efas/?$ https://efas.euripedesbarsanulfo.org.br/?evento=12 [R=301,L,NC]
+
+# URL Amigável para a Festa Junina 2026
+RewriteRule ^festa-junina-2026$ /festa-junina-2026/ [R=301,L]
+RewriteRule ^festa-junina-2026/(.*)$ mesadobem/$1 [L,NC]

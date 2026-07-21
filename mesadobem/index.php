@@ -252,19 +252,37 @@ if ($status === 'success') {
             margin: 0 auto;
             width: 100%;
             padding: 0 20px 40px 20px;
-            display: grid;
-            grid-template-columns: 340px 1fr;
-            gap: 30px;
             flex: 1;
             min-width: 0;
         }
 
-        /* Column Left (Sidebar Cards) */
-        .sidebar-col {
+        /* New Layout Classes */
+        .step-mesas {
+            width: 100%;
             display: flex;
             flex-direction: column;
             gap: 20px;
-            min-width: 0;
+        }
+
+        .step-checkout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 340px;
+            gap: 30px;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .checkout-forms {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .checkout-summary {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .card {
@@ -369,6 +387,36 @@ if ($status === 'success') {
             transform: none;
         }
 
+        .btn-pay {
+            width: 100%;
+            background: #22c55e;
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-pay:hover {
+            background: #16a34a;
+            transform: translateY(-1px);
+        }
+
+        .btn-pay:disabled {
+            background: #86efac;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         /* Resumo Card */
         .summary-row {
             display: flex;
@@ -434,13 +482,7 @@ if ($status === 'success') {
             margin-top: 10px;
         }
 
-        /* Right Content Area */
-        .main-col {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            min-width: 0;
-        }
+        /* Right Content Area is now removed */
 
         /* Alert Callout */
         .callout-alert {
@@ -654,13 +696,20 @@ if ($status === 'success') {
 
         /* Map Bottom Action Bar */
         .map-action-bar {
-            width: 100%;
+            position: sticky;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-            margin-top: 20px;
+            padding: 20px 24px;
+            margin: 20px -24px -24px -24px;
+            width: calc(100% + 48px);
+            z-index: 100;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+            border-radius: 0 0 16px 16px;
         }
 
         .map-action-title {
@@ -849,17 +898,14 @@ if ($status === 'success') {
             margin-bottom: 20px;
         }
 
-        /* Responsividade */
         @media (max-width: 1024px) {
-            .container {
+            .step-checkout {
                 grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 0 15px 30px 15px;
-            }
-            .sidebar-col {
                 max-width: 500px;
-                width: 100%;
                 margin: 0 auto;
+            }
+            .container {
+                padding: 0 15px 30px 15px;
             }
             .steps-container {
                 margin: 20px auto;
@@ -1049,11 +1095,11 @@ if ($status === 'success') {
         <div class="steps-bar">
             <div class="step-item active" id="stepIndicator1">
                 <div class="step-num">1</div>
-                <span>Cadastro</span>
+                <span>Escolher Mesas</span>
             </div>
             <div class="step-item" id="stepIndicator2">
                 <div class="step-num">2</div>
-                <span>Escolher Mesas</span>
+                <span>Cadastro</span>
             </div>
             <div class="step-item" id="stepIndicator3">
                 <div class="step-num">3</div>
@@ -1069,114 +1115,14 @@ if ($status === 'success') {
     <!-- Main Container -->
     <div class="container">
         
-        <!-- Left Column -->
-        <div class="sidebar-col">
-            
-            <!-- STEP 1 & 2 Left Card: Cadastro / Pagamento -->
-            <div class="card" id="formCard">
-                <!-- Cadastro Form -->
-                <div id="cadastroPanel">
-                    <div class="card-title">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                        Cadastro
-                    </div>
-                    <div class="form-group">
-                        <label for="nome">Nome completo</label>
-                        <input type="text" id="nome" class="form-control" placeholder="Digite seu nome completo">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">E-mail</label>
-                        <input type="email" id="email" class="form-control" placeholder="seu@email.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="telefone">WhatsApp</label>
-                        <input type="text" id="telefone" class="form-control" placeholder="(11) 99999-9999">
-                    </div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="novidades" checked>
-                        <label for="novidades">Quero receber novidades do evento</label>
-                    </div>
-                    <button class="btn-action" id="btnContinuarCadastro">
-                        Continuar para escolha &rarr;
-                    </button>
-                </div>
-
-                <!-- Pagamento Panel (Step 3) -->
-                <div class="payment-panel" id="paymentPanel">
-                    <div class="card-title">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-                        Pagamento
-                    </div>
-                    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:15px;">
-                        Escolha o método de pagamento preferencial para continuar:
-                    </p>
-                    <div class="payment-option-grid">
-                        <div>
-                            <input type="radio" name="pay_opt" id="opt_pix" class="payment-radio" checked>
-                            <label for="opt_pix" class="payment-box">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 12h3v8h14v-8h3L12 2z"/></svg>
-                                PIX QR Code
-                            </label>
-                        </div>
-                        <div>
-                            <input type="radio" name="pay_opt" id="opt_card" class="payment-radio">
-                            <label for="opt_card" class="payment-box">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-                                Cartão Crédito
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <button class="btn-action" id="btnFinalizarPagamento">
-                        Finalizar Reserva e Pagar &rarr;
-                    </button>
-                    <button class="btn-outline" id="btnVoltarEscolha" style="margin-top:10px;">
-                        &larr; Alterar mesas
-                    </button>
-                </div>
+        <?php if (!empty($msg_alerta)): ?>
+            <div class="alert <?php echo $alert_class; ?>" style="margin-bottom: 20px;">
+                <?php echo htmlspecialchars($msg_alerta); ?>
             </div>
+        <?php endif; ?>
 
-            <!-- Resumo Card -->
-            <div class="card">
-                <div class="card-title">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                    Resumo da compra
-                </div>
-                <div class="summary-row">
-                    <span>Mesas selecionadas</span>
-                    <span id="summaryCount" style="font-weight: 600;">0 mesa(s)</span>
-                </div>
-                <div class="summary-row summary-total">
-                    <span>Total</span>
-                    <span id="summaryTotal">R$ 0,00</span>
-                </div>
-                <button class="btn-outline" id="btnIrPagamento" disabled>
-                    Ir para pagamento
-                </button>
-            </div>
-
-            <!-- Sobre Card -->
-            <div class="card about-card">
-                <div class="card-title">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                    Sobre o evento
-                </div>
-                <p>
-                    Toda a renda do evento será destinada a projetos sociais que transformam vidas e constroem um futuro melhor para nossa comunidade.
-                </p>
-                <a href="#">Participe. Doe. Transforme vidas.</a>
-            </div>
-        </div>
-
-        <!-- Right Column (Interaction Map) -->
-        <div class="main-col">
-            
-            <?php if (!empty($msg_alerta)): ?>
-                <div class="alert <?php echo $alert_class; ?>">
-                    <?php echo htmlspecialchars($msg_alerta); ?>
-                </div>
-            <?php endif; ?>
-
+        <!-- STEP 1: MESAS -->
+        <div id="stepMesas" class="step-mesas">
             <!-- Interactive Map Wrapper -->
             <div class="card" style="padding: 24px;">
                 <div class="callout-alert">
@@ -1204,7 +1150,7 @@ if ($status === 'success') {
                 </div>
 
                 <div class="grid-scroll-area">
-                    <div class="salon-grid disabled" id="salonGrid">
+                    <div class="salon-grid" id="salonGrid">
                         <!-- Corners - Plants -->
                         <div class="corner-plant plant-tl">🌿</div>
                         <div class="corner-plant plant-tr">🌿</div>
@@ -1226,11 +1172,106 @@ if ($status === 'success') {
                     </div>
                     <div class="map-actions-buttons">
                         <button class="btn-clear" id="btnClearSelection" disabled>Limpar seleção</button>
-                        <button class="btn-view-summary" id="btnVerResumo" disabled>Ver resumo (0)</button>
+                        <button class="btn-view-summary" id="btnAvancar" disabled>Avançar</button>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <!-- STEP 2 & 3: CHECKOUT -->
+        <div id="stepCheckout" class="step-checkout" style="display: none;">
+            
+            <!-- Left Column: Forms -->
+            <div class="checkout-forms">
+                <!-- STEP 2 & 3 Left Card: Cadastro / Pagamento -->
+                <div class="card" id="formCard">
+                    <!-- Cadastro Form -->
+                    <div id="cadastroPanel">
+                        <div class="card-title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            Cadastro
+                        </div>
+                        <div class="form-group">
+                            <label for="nome">Nome completo</label>
+                            <input type="text" id="nome" class="form-control" placeholder="Digite seu nome completo">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" class="form-control" placeholder="seu@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">WhatsApp</label>
+                            <input type="text" id="telefone" class="form-control" placeholder="(11) 99999-9999">
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="novidades" checked>
+                            <label for="novidades">Quero receber novidades do evento</label>
+                        </div>
+                        <button class="btn-action" id="btnContinuarCadastro">
+                            Ir para pagamento &rarr;
+                        </button>
+                    </div>
+
+                <!-- Pagamento Panel (Step 3) -->
+                <div class="payment-panel" id="paymentPanel">
+                    <div class="card-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                        Pagamento
+                    </div>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:15px;">
+                        Escolha o método de pagamento preferencial para continuar:
+                    </p>
+                    <div class="payment-option-grid" style="grid-template-columns: 1fr;">
+                        <div>
+                            <input type="radio" name="pay_opt" id="opt_mercadopago" class="payment-radio" checked>
+                            <label for="opt_mercadopago" class="payment-box">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/><path d="M7 15h0M11 15h2"/></svg>
+                                Mercado Pago (Cartão, PIX ou Boleto)
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-pay" id="btnFinalizarPagamento">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                        Finalizar Reserva e Pagar &rarr;
+                    </button>
+                    <button class="btn-outline" id="btnVoltarEscolha" style="margin-top:10px;">
+                        &larr; Alterar mesas
+                    </button>
+                </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Summary -->
+            <div class="checkout-summary">
+                <!-- Resumo Card -->
+                <div class="card">
+                    <div class="card-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        Resumo da compra
+                    </div>
+                    <div class="summary-row">
+                        <span>Mesas selecionadas</span>
+                        <span id="summaryCount" style="font-weight: 600;">0 mesa(s)</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Total</span>
+                        <span id="summaryTotal">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <!-- Sobre Card -->
+                <div class="card about-card">
+                    <div class="card-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                        Sobre o evento
+                    </div>
+                    <p>
+                        Nossa Festa Junina é um momento de alegria, encontro e solidariedade. Toda a renda arrecadada será revertida para a manutenção do Educandário Maria de Nazaré, ajudando a manter viva uma missão que acolhe, educa e inspira tantas famílias.
+                    </p>
+                    <a href="#">Venha festejar conosco. Sua presença faz a diferença.</a>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -1334,27 +1375,36 @@ if ($status === 'success') {
                 }
             }
 
-            // Grid disabling/enabling
+            // Grid disabling/enabling - Grid is enabled from step 1 now
             const grid = document.getElementById('salonGrid');
-            if (step >= 2) {
-                grid.classList.remove('disabled');
-            } else {
-                grid.classList.add('disabled');
-            }
+            grid.classList.remove('disabled');
 
-            // Side panels
+            // Side panels visibility
+            const stepMesas = document.getElementById('stepMesas');
+            const stepCheckout = document.getElementById('stepCheckout');
             const cadastroPanel = document.getElementById('cadastroPanel');
             const paymentPanel = document.getElementById('paymentPanel');
-            if (step === 3) {
-                cadastroPanel.style.display = 'none';
-                paymentPanel.style.display = 'block';
-            } else {
+            
+            if (step === 1) {
+                stepMesas.style.display = 'flex';
+                stepCheckout.style.display = 'none';
+            } else if (step === 2) {
+                stepMesas.style.display = 'none';
+                stepCheckout.style.display = 'grid';
                 cadastroPanel.style.display = 'block';
                 paymentPanel.style.display = 'none';
+            } else if (step === 3) {
+                stepMesas.style.display = 'none';
+                stepCheckout.style.display = 'grid';
+                cadastroPanel.style.display = 'none';
+                paymentPanel.style.display = 'block';
+            } else if (step === 4) {
+                stepMesas.style.display = 'none';
+                stepCheckout.style.display = 'grid';
             }
         }
 
-        // Validate Step 1 - Cadastro
+        // Validate Step 2 - Cadastro
         document.getElementById('btnContinuarCadastro').addEventListener('click', () => {
             const nome = document.getElementById('nome').value.trim();
             const email = document.getElementById('email').value.trim();
@@ -1366,7 +1416,7 @@ if ($status === 'success') {
             }
 
             clienteData = { nome, email, telefone };
-            setStep(2);
+            setStep(3); // Avança para pagamento
         });
 
         // Load Tables from Backend
@@ -1441,10 +1491,6 @@ if ($status === 'success') {
 
         // Table Selection Toggle
         function selectMesa(num) {
-            if (currentStep < 2) {
-                alert('Preencha seu cadastro para poder escolher mesas.');
-                return;
-            }
 
             const index = mesasSelecionadas.indexOf(num);
             const element = document.querySelector(`.round-table[data-numero="${num}"]`);
@@ -1474,9 +1520,8 @@ if ($status === 'success') {
         function atualizarTotais() {
             const countLabel = document.getElementById('summaryCount');
             const totalLabel = document.getElementById('summaryTotal');
-            const btnIrPagamento = document.getElementById('btnIrPagamento');
             const btnClear = document.getElementById('btnClearSelection');
-            const btnVerResumo = document.getElementById('btnVerResumo');
+            const btnAvancar = document.getElementById('btnAvancar');
 
             const count = mesasSelecionadas.length;
             const total = count * valorMesa;
@@ -1485,29 +1530,23 @@ if ($status === 'success') {
             totalLabel.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
 
             if (count > 0) {
-                btnIrPagamento.disabled = false;
                 btnClear.disabled = false;
-                btnVerResumo.disabled = false;
-                btnVerResumo.innerText = `Ver resumo (${count})`;
+                btnAvancar.disabled = false;
+                btnAvancar.innerText = `Avançar (R$ ${total.toFixed(2).replace('.', ',')})`;
             } else {
-                btnIrPagamento.disabled = true;
                 btnClear.disabled = true;
-                btnVerResumo.disabled = true;
-                btnVerResumo.innerText = `Ver resumo (0)`;
+                btnAvancar.disabled = true;
+                btnAvancar.innerText = `Avançar`;
             }
         }
 
         // Action Buttons navigation
-        document.getElementById('btnIrPagamento').addEventListener('click', () => {
-            setStep(3);
-        });
-
-        document.getElementById('btnVerResumo').addEventListener('click', () => {
-            setStep(3);
+        document.getElementById('btnAvancar').addEventListener('click', () => {
+            setStep(2); // Avança para cadastro
         });
 
         document.getElementById('btnVoltarEscolha').addEventListener('click', () => {
-            setStep(2);
+            setStep(1); // Volta para mesas
         });
 
         // Checkout booking submission
