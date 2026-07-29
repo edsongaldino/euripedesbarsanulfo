@@ -183,40 +183,42 @@ foreach ($results as $payment) {
                     }
                 }
             }
-        // Handle cancelled or rejected payments to free up tables
-        if (($status === 'cancelled' || $status === 'rejected') && !empty($ext_ref)) {
-            if (strpos($ext_ref, 'EFAS-MESAS-') === 0) {
-                $ids_str = substr($ext_ref, strlen('EFAS-MESAS-'));
-                $ids = array_map('intval', explode('-', $ids_str));
+        } // Closes else block
+    } // Closes if ($status === 'approved')
+
+    // Handle cancelled or rejected payments to free up tables
+    if (($status === 'cancelled' || $status === 'rejected') && !empty($ext_ref)) {
+        if (strpos($ext_ref, 'EFAS-MESAS-') === 0) {
+            $ids_str = substr($ext_ref, strlen('EFAS-MESAS-'));
+            $ids = array_map('intval', explode('-', $ids_str));
+            
+            if (!empty($ids)) {
+                $ids_str_sql = implode(',', $ids);
                 
-                if (!empty($ids)) {
-                    $ids_str_sql = implode(',', $ids);
-                    
-                    $sql_check = "SELECT codigo_reserva FROM reserva_mesa WHERE codigo_reserva IN ($ids_str_sql) AND codigo_situacao = 1";
-                    $query_check = mysqli_query($conexao, $sql_check);
-                    
-                    $pending_ids = [];
-                    if ($query_check) {
-                        while ($row = mysqli_fetch_assoc($query_check)) {
-                            $pending_ids[] = (int)$row['codigo_reserva'];
-                        }
+                $sql_check = "SELECT codigo_reserva FROM reserva_mesa WHERE codigo_reserva IN ($ids_str_sql) AND codigo_situacao = 1";
+                $query_check = mysqli_query($conexao, $sql_check);
+                
+                $pending_ids = [];
+                if ($query_check) {
+                    while ($row = mysqli_fetch_assoc($query_check)) {
+                        $pending_ids[] = (int)$row['codigo_reserva'];
                     }
+                }
+                
+                if (!empty($pending_ids)) {
+                    $pending_str = implode(',', $pending_ids);
+                    // Status 3 = Cancelada/Liberada
+                    $sql_update = "UPDATE reserva_mesa SET codigo_situacao = 3 WHERE codigo_reserva IN ($pending_str)";
+                    $query_update = mysqli_query($conexao, $sql_update);
                     
-                    if (!empty($pending_ids)) {
-                        $pending_str = implode(',', $pending_ids);
-                        // Status 3 = Cancelada/Liberada
-                        $sql_update = "UPDATE reserva_mesa SET codigo_situacao = 3 WHERE codigo_reserva IN ($pending_str)";
-                        $query_update = mysqli_query($conexao, $sql_update);
-                        
-                        if ($query_update) {
-                            log_sync("CANCELAMENTO: Reservas de mesa liberadas (status 3) por pagamento recusado/cancelado no MP para os IDs: $pending_str");
-                        }
+                    if ($query_update) {
+                        log_sync("CANCELAMENTO: Reservas de mesa liberadas (status 3) por pagamento recusado/cancelado no MP para os IDs: $pending_str");
                     }
                 }
             }
         }
     }
-}
+} // Closes foreach
 
 // Limpeza automática de mesas pendentes que foram abandonadas (mais de 24 horas sem pagamento)
 $tempo_expiracao = date('Y-m-d H:i:s', strtotime('-24 hours'));
