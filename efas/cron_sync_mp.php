@@ -83,9 +83,69 @@ foreach ($results as $payment) {
         $ids = [];
         
         // Parseia os IDs do external_reference
-        if (strpos($ext_ref, 'EFAS-MULTI-') === 0) {
+        if (strpos($ext_ref, 'EFAS-MESAS-') === 0) {
+            $ids_str = substr($ext_ref, strlen('EFAS-MESAS-'));
+            $ids = array_map('intval', explode('-', $ids_str));
+            
+            if (!empty($ids)) {
+                $ids_str_sql = implode(',', $ids);
+                
+                // Verifica se alguma dessas reservas ainda está com status 1 (Pendente)
+                $sql_check = "SELECT codigo_reserva FROM reserva_mesa WHERE codigo_reserva IN ($ids_str_sql) AND codigo_situacao = 1";
+                $query_check = mysqli_query($conexao, $sql_check);
+                
+                $pending_ids = [];
+                if ($query_check) {
+                    while ($row = mysqli_fetch_assoc($query_check)) {
+                        $pending_ids[] = (int)$row['codigo_reserva'];
+                    }
+                }
+                
+                if (!empty($pending_ids)) {
+                    $pending_str = implode(',', $pending_ids);
+                    $sql_update = "UPDATE reserva_mesa SET codigo_situacao = 2 WHERE codigo_reserva IN ($pending_str)";
+                    $query_update = mysqli_query($conexao, $sql_update);
+                    
+                    if ($query_update) {
+                        log_sync("SUCESSO: Reservas de mesa atualizadas para Pago (status 2) para os IDs: $pending_str (Pagamento MP ID: " . $payment['id'] . ")");
+                        $updated_count += count($pending_ids);
+                    } else {
+                        log_sync("ERRO: Falha ao atualizar reservas de mesa no banco: $pending_str | Erro: " . mysqli_error($conexao));
+                    }
+                }
+            }
+        } elseif (strpos($ext_ref, 'EFAS-MULTI-') === 0) {
             $ids_str = substr($ext_ref, strlen('EFAS-MULTI-'));
             $ids = array_map('intval', explode('-', $ids_str));
+            
+            if (!empty($ids)) {
+                $ids_escaped = array_map('intval', $ids);
+                $ids_str_sql = implode(',', $ids_escaped);
+                
+                // Verifica se alguma dessas inscrições ainda está com status 1 (Pendente)
+                $sql_check = "SELECT codigo_inscricao_evento FROM inscricao_evento WHERE codigo_inscricao_evento IN ($ids_str_sql) AND codigo_situacao_inscricao = 1";
+                $query_check = mysqli_query($conexao, $sql_check);
+                
+                $pending_ids = [];
+                if ($query_check) {
+                    while ($row = mysqli_fetch_assoc($query_check)) {
+                        $pending_ids[] = (int)$row['codigo_inscricao_evento'];
+                    }
+                }
+                
+                if (!empty($pending_ids)) {
+                    $pending_str = implode(',', $pending_ids);
+                    $sql_update = "UPDATE inscricao_evento SET codigo_situacao_inscricao = 2 WHERE codigo_inscricao_evento IN ($pending_str)";
+                    $query_update = mysqli_query($conexao, $sql_update);
+                    
+                    if ($query_update) {
+                        log_sync("SUCESSO: Inscrições atualizadas para Pago (status 2) para os IDs: $pending_str (Pagamento MP ID: " . $payment['id'] . ")");
+                        $updated_count += count($pending_ids);
+                    } else {
+                        log_sync("ERRO: Falha ao atualizar inscrições no banco: $pending_str | Erro: " . mysqli_error($conexao));
+                    }
+                }
+            }
         } else {
             if (preg_match('/EFAS-(\d+)/', $ext_ref, $matches)) {
                 $ids = [(int)$matches[1]];
@@ -95,33 +155,32 @@ foreach ($results as $payment) {
                     $ids = array_map('intval', $matches[0]);
                 }
             }
-        }
-        
-        if (!empty($ids)) {
-            $ids_escaped = array_map('intval', $ids);
-            $ids_str = implode(',', $ids_escaped);
             
-            // Verifica se alguma dessas inscrições ainda está com status 1 (Pendente)
-            $sql_check = "SELECT codigo_inscricao_evento FROM inscricao_evento WHERE codigo_inscricao_evento IN ($ids_str) AND codigo_situacao_inscricao = 1";
-            $query_check = mysqli_query($conexao, $sql_check);
-            
-            $pending_ids = [];
-            if ($query_check) {
-                while ($row = mysqli_fetch_assoc($query_check)) {
-                    $pending_ids[] = (int)$row['codigo_inscricao_evento'];
-                }
-            }
-            
-            if (!empty($pending_ids)) {
-                $pending_str = implode(',', $pending_ids);
-                $sql_update = "UPDATE inscricao_evento SET codigo_situacao_inscricao = 2 WHERE codigo_inscricao_evento IN ($pending_str)";
-                $query_update = mysqli_query($conexao, $sql_update);
+            if (!empty($ids)) {
+                $ids_escaped = array_map('intval', $ids);
+                $ids_str_sql = implode(',', $ids_escaped);
                 
-                if ($query_update) {
-                    log_sync("SUCESSO: Inscrições atualizadas para Pago (status 2) para os IDs: $pending_str (Pagamento MP ID: " . $payment['id'] . ")");
-                    $updated_count += count($pending_ids);
-                } else {
-                    log_sync("ERRO: Falha ao atualizar IDs no banco: $pending_str | Erro: " . mysqli_error($conexao));
+                $sql_check = "SELECT codigo_inscricao_evento FROM inscricao_evento WHERE codigo_inscricao_evento IN ($ids_str_sql) AND codigo_situacao_inscricao = 1";
+                $query_check = mysqli_query($conexao, $sql_check);
+                
+                $pending_ids = [];
+                if ($query_check) {
+                    while ($row = mysqli_fetch_assoc($query_check)) {
+                        $pending_ids[] = (int)$row['codigo_inscricao_evento'];
+                    }
+                }
+                
+                if (!empty($pending_ids)) {
+                    $pending_str = implode(',', $pending_ids);
+                    $sql_update = "UPDATE inscricao_evento SET codigo_situacao_inscricao = 2 WHERE codigo_inscricao_evento IN ($pending_str)";
+                    $query_update = mysqli_query($conexao, $sql_update);
+                    
+                    if ($query_update) {
+                        log_sync("SUCESSO: Inscrições atualizadas para Pago (status 2) para os IDs: $pending_str (Pagamento MP ID: " . $payment['id'] . ")");
+                        $updated_count += count($pending_ids);
+                    } else {
+                        log_sync("ERRO: Falha ao atualizar inscrições no banco: $pending_str | Erro: " . mysqli_error($conexao));
+                    }
                 }
             }
         }
