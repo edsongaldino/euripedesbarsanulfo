@@ -87,6 +87,11 @@ if ($method === 'POST') {
     
     foreach ($mesas_selecionadas as $num_mesa) {
         $num_mesa = (int)$num_mesa;
+        
+        // Remove qualquer reserva anterior cancelada para esta mesa para evitar erro de UNIQUE KEY
+        $sql_delete_cancelled = "DELETE FROM reserva_mesa WHERE codigo_evento = '$codigo_evento' AND numero_mesa = '$num_mesa' AND codigo_situacao = 3";
+        mysqli_query($conexao, $sql_delete_cancelled);
+        
         $sql_insert = "INSERT INTO reserva_mesa (codigo_evento, numero_mesa, nome_participante, email_participante, telefone_participante, valor_reserva, codigo_situacao) 
                        VALUES ('$codigo_evento', '$num_mesa', '$nome', '$email', '$telefone', '$valor_mesa', 1)";
         
